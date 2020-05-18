@@ -92,8 +92,18 @@ git
         如何将本地仓库同步到远程仓库
             git clone url
                 将远程仓库（github）上的项目，复制到本地
-            git push
+            git remote add url
                 将本地仓库提交到远程仓库
+            git push origin master
     分支
         git branch feature//创建一个新的分支
         git checkout feature//切换到feature分支（head指针从只想master主分支，变为指向feature分支）
+        git merge feature //合并分支
+    别名
+        设置
+            git config --global alias.co checkout
+            $ git config --global alias.co checkout
+            $ git config --global alias.br branch
+            $ git config --global alias.ci commit
+            $ git config --global alias.st status
+            $ git config --global alias.unstage 'reset HEAD --'
