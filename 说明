@@ -1,0 +1,99 @@
+Github（借助gitHub托管项目代码）
+    基本概念
+        仓库（Repository）
+            一个项目对应一个仓库，多个开源项目则有多个仓库
+        收藏（star）
+            收藏项目的人数
+        复制克隆项目（fork）
+            不修改仓库中的原代码，进行分支功能的修改等（该fork的项目是独立存在的）
+        发起请求（Pull Request）
+            基于fork，修改了项目，发送一个请求给原仓库，原仓库觉得认可，就合并到自己的仓库中
+        关注（watch）
+            关注这个项目，这个项目仓库更新，可以得到通知
+        事务卡片（Issue）
+            发现代码bug，目前没有成型代码，需要讨论使用
+        Github
+            左侧是动态，右侧显示所有的git库
+        仓库主页
+            项目的信息
+        个人主页
+            个人信息，头像，个人简介，关注的人和关注的项目
+    注册账号
+        Github在过国外服务器，访问较慢，需要翻墙（Shadowsocks）
+        私有仓库
+            收费
+            只有自己以及授权用户可以使用
+    创建仓库
+        一个仓库对应一个项目，方便我们进行管理
+        README.md文件用来详细描述该项目
+        issues
+            新建issue
+        仓库主页和用户主页
+            点击左上角的名字进入
+    仓库管理
+        新建文件
+            点击create
+        上传文件
+            点击上传文件按钮
+        搜索文件
+            findfile
+        克隆和下载
+            点击download
+    issues
+        其他用户访问时候，进行交流和修改申请
+git
+    三大区域
+        工作区域
+            添加编辑修改文件
+        暂存区
+            已经修改的文件存放到这里，最后统一提交到git仓库
+        git仓库
+            最终确定的文件保存到仓库，成为一个新的版本
+    基本命令
+        git status 查看文件状态，处于哪个区域
+        git add fileName 将文件放到暂存区
+        git commit -m "提交描述" 将暂存区文件提交到git仓库
+    配置
+        初始化基本信息
+            git config --global user.name 'v_sldeng'
+            git config --global user.email 'kmckkdeng@21kunpeng.com'
+            注意：该设置在github仓库主页显示谁提交了该文件
+        初始化一个 本地新的仓库
+            创建文件夹
+                mkdir test
+            在文件夹内初始化git（创建git）
+                cd test
+                git init（生成一个隐藏的.git）
+                向仓库中添加文件
+                    git status
+                    touch index.html
+                    git status
+                    git add index.html
+                    git status
+                    git commit -m index.html
+                修改仓库文件
+                    修改文件后
+                    git status
+                    git add index.html
+                    git status
+                    git commit -m index.html
+	撤销暂存
+	    git  reset HEAD
+                删除仓库文件
+                    删除文件
+                    从git中删除文件
+                        git rm index.html
+                    提交删除操作
+                        git commit -m "第一次通过git删除仓库中的文件"
+	查看历史提交记录
+	    git log
+    git远程仓库
+        共享，实现代码的备份
+        如何将本地仓库同步到远程仓库
+            git clone url
+                将远程仓库（github）上的项目，复制到本地
+            git push
+                将本地仓库提交到远程仓库
+    分支
+        git branch feature//创建一个新的分支
+        git checkout feature//切换到feature分支（head指针从只想master主分支，变为指向feature分支）
