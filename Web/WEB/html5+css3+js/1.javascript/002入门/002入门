@@ -1,0 +1,5 @@
+ECMAScript
+BOM（浏览器对象模型）
+DOM（文档对象模型）
+  所有js代码都必须卸载script标签里
+  type 表示该标签的类型

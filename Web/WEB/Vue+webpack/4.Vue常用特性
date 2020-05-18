@@ -1,0 +1,135 @@
+一、表单操作
+  作用：用户交互
+  input单行文本
+    <input type="text" v-model="uname"/>
+  radio单选框
+    <input type="radio" id="rale" value="1" v-model="gender"/>
+    <input type="radio" id="wrale" value="2" v-model="women"/>
+  select下拉多选
+    <select v-model="occpu" multiple="true">
+      <option value="1">工程师</option>
+      <option value="2">教师</option>
+      <option value="3">律师</option>
+    </select>
+    单选：multiple="false"
+    多选：multiple="true"
+    occpu多选时候，要设置为数组
+  textarea多行文本
+     <input type="textarea" v-model="dec"/>
+    checkbox多选框
+    <input type="checkbox" value="1" v-model="hobby">
+    <input type="checkbox" value="2" v-model="hobby">
+    hobby:['1','2']
+  表单域修饰符
+    number：转换为数字
+      <input v-model.number="age" type=text/>
+    trim：输入的，前面和后面会去掉空格
+    lazy：input事件切换为change事件（input，有东西输入就变化；change，失去焦点的时候才会执行）
+二、自定义指令
+  <input type="text" v-focus />
+  Vue.directive('focus',{
+    inserted:function(el){
+      //el表示指令所绑定的元素
+      el.focus();
+    }
+  })
+  带参数的自定义指令binding(对象：name,value,oldvalue,expression,arg,)
+    <input type="text" v-color="msg"/>
+    Vue.directive('color'{
+      inserted/bind:function(el,binding){
+        //binding==msg
+        el.style.backgroundColor=binding.value.color//msg是对象
+      }
+    })
+  局部指令：(加载再vue实例组件中，和data，methods等平级)
+    directives：{
+      focus:{
+        inserted:function(el){
+         //el表示指令所绑定的元素
+          el.focus();
+        }        
+      }
+    }
+三、计算属性
+  表达式的计算逻辑很复杂，使用计算属性会很简洁
+  computed：{
+    reverString:function(){
+      return this.msg.split('').reverse().join('');
+    }
+  }//{{reverString}}就可以直接使用计算属性
+    //计算属性是基于它们的依赖进行缓存的，方法属性(methods)没有缓存
+    //计算属性缓存好，可以多次使用，方法调用一次，运行一次
+    //依赖data的数据
+四、过滤器
+  格式化数据hello->Hello
+  全局过滤器
+    <input type="text" v-model='msg/>
+    Vue.filter('upper',function(val){
+      return val.charAt[0].toUpperCase()+val.slice(1)
+    })
+    {{ msg | upper }}//支持同时使用多个，排序继续写就可以使用多个，过滤器，按顺序嵌套执行
+    <div :abc='msg | upper'></div>
+  局部过滤器
+    filter:{
+      upper:function(val){
+        return val.charAt[0].toUpperCase()+val.slice(1)
+      }
+    }
+    过滤器传参
+    msg|filter('yyyy-MM-dd')//'yyyy-MM-dd是格式
+
+五、侦听器
+  数据改变，就会触发侦听器的方法。
+  和computed不同：执行异步和开销比较大的操作
+  watch:{
+    firstName:function(val){
+      this.fullName=val+' '+this.lastName;
+    },
+    lastNmae:function(val){
+      this.fullName=this.lastName+' '+val
+    }
+  }
+  computed:{
+    fullName:function(){
+      return this.firstName+' '+this.lastNmae
+    }
+  }
+六、生命周期
+  钩子函数
+    挂载
+    befroeCreate:function(){
+
+    }
+    created:function(){
+
+    }
+    beforeMount:function(){
+
+    }
+    mounted:function(){
+      //页面模板已经初始化完成，这里可以使用数据开始渲染页面
+    }
+
+    更新
+    beforeUpdate:function(){
+
+    }
+    updated:function(){
+
+    }
+    销毁
+    beforeDestroy:function(){
+
+    }
+    destroyed:function(){
+
+    }
+    this.$destroy();//销毁实例的一些资源，类似data，methods，等等
+
+  变异方法/替换数组
+    Vue重写的方法，将类似pop（），push（）等可以响应式的使用//数据的变化，可以直接影响页面的变化
+    filter(),concat()，slice()，能创建一个新的数组，不影响原数组
+  数组响应式变化
+    Vue.set(vm.list,2,'lemon);
+    vm.$(vm.list,1,'lemon');
+    vm.$set(vm.info,'genter','female');

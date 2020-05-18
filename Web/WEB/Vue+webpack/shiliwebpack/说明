@@ -1,0 +1,89 @@
+在空目录上运行npm init -y,初始化生成一个package.json配置文件
+新建src目录防止源码
+新建index.html在src目录下
+初始化首页基本结构
+1.安装webpack和webpack-cli//npm install -D webpack webpack-cli
+2.在项目根目录中创建一个webpack.config.json配置文件,这是webpack的所有配置
+3.在webpack.config.js文件中初始化构建模式
+  module.exports={
+    mode:'development'//mode用来指定构建模式，development开发模式，最后合成的js文件有一定格式，但文件资源很大，适合开发，不适合生产
+    //相反，使用mode:'production'无序js适合生产，不适合开发
+  }
+4.在package.json配置文件中的scripts节点下，新增dev脚本
+  "dev":"webpack"//script节点下的脚本，可以通过npm run执行
+5.使用npm run dev 使用webpack进行打包
+/////////给webpack.config.json配置文件
+webpack 4.xx版本中,entry默认入口是src/index.js
+                  output默认出口是dist/main.js
+6.手动创建webpack的出口与入口
+  设置path，推荐引入webpack的核心模块//const path=require('path')
+  entry:path.join(__dirname,'./src/index.js)
+  output:{
+    path:path.join(__dirname,'./dist'),
+    filename:'bundle.js'
+  }
+7.webpack的自动打包功能
+  安装webpack-dev-server
+  给package.json->scripts节点下添加命令
+    "dev": "webpack-dev-server"
+    "build" :"webpack"
+  打包好的bundle.js放在网页的根目录下，且是隐藏的，看不见的
+8.配置html-webpack-plugin生成预览页面
+  安装html-webpack-plugin
+  在webpack.config.js中引入插件
+    const HtmlWebpakcPlugin=require('html-webpack-plugin');
+    module.exports={
+      plugins:[
+        new HtmlWebpakcPlugin({
+          template:'./src/index.html',
+          filename:'index.html'
+        })
+      ]
+    }
+9.dev-server参数
+  --open 自动打开网页
+  --host ip地址
+  --port 端口号
+10.配置loader，处理非.js文件
+  协助webpack打包
+  css
+    需要css-loader和style-loader
+    配置rules数组，添加处理规则
+  less
+    less-loader和less
+    配置rules数组，添加处理规则
+  scss
+    sass-loader和node-sass
+    配置rules数组，添加处理规则
+11.配置postCSS自动添加css兼容前缀
+  用处：解决不同浏览器的兼容问题
+    安装：postcss-loader autoprefixer
+    根目录创建：postcss.config.js
+    初始化:const autoprefixer=require('autoprefixer')
+          module.exports={
+            plugins:[
+              new autoprefixer(),
+            ]
+          }
+12.打包样式表中的图片
+  用处：webpack无法处理图片链接
+    安装：url-loader file-loader
+    在webpack配置文件的loader规则中新增一个
+    { test:'/\.png|jpg|gif|svg|bmp|ppf|eot|woff|woff2',use:'url-loader?limit=12456'}
+13.打包高级js语法，需要配置babel
+  安装转换相关的包 babel-loader @babel/core @babel/runtime
+  安装语法插件相关的包 @babel/plugin-transform-runtime @babel/plugin-proposal-class-properties
+  根目录配置babel.config.js
+14.webpack配置Vue组件的加载
+  安装 vue-loader vue-template-compiler
+  在webpack中导入vue-loader的插件，并在webpack的插件上挂载他
+  配置vue文件的处理规则，使用vue-loader 处理
+15.在webpack项目中使用Vue
+  安装 vue
+  导入Vue构造函数
+  导入App根组件
+  通过Vue实例化Vue实例，并将App根组件，通过render渲染到el指定的位置
+
+//运行npm install jquery -S 命令，安装jQuery
+//基于安装的jQuery实现列表隔行变色的效果，通过模块化的形式，导入并使用
+

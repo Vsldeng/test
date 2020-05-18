@@ -1,0 +1,79 @@
+事件基础
+    概念：JavaScript事件是由访问Web页面的用户引起的一系列操作，当用户执行某些操作的时候，去执行一系列代码，或者用来获取事件的详细信息，如鼠标位置、键盘按键等
+    事件类型：所有的事件处理函数都是（on+事件名称）组成
+        鼠标事件
+            单击事件：
+                window.onload=function(){
+                    var myBtn=document.getElementById("test");
+                    myBtn.onclick=function(){
+                        alert(this.innerText);
+                    }
+                }
+            鼠标移入事件：
+                myBtn.onmouseover=function(){
+                    alert(this.innerText);
+                }
+                myBtn.onmouseDown=function(){
+                    alert(onmouseDown);
+                }
+                myBtn.onmouseUp=function(){
+                    alert(onmouseUp);
+                }
+            表单事件
+                myForm.onsubmit=function(){
+                    //表单提交
+                }
+                myInput.onfocus=function(){
+                    //表单获得焦点
+                }
+                myInput.onblur=function(){
+                    //表单失去焦点
+                }
+                myInput.onchange=function(){
+                    //表单内容改变，并且失去焦点
+                }
+        键盘事件
+            快捷键
+                altKey ctrlKey shiftKey evt.keyCode
+            onkeypress
+                按下字符键才触发
+            onkeydown
+                按下任意键都触发
+            onkeyup
+
+        html事件
+事件流
+
+事件处理函数
+事件对象
+    触发某个事件，会产生一个事件对象，这个对象包含着所有有关的信息，通过事件绑定的执行函数可以得到一个隐藏参数，自动分配一个Event对象
+    //ie中要用window.event
+    e.clientX/e.clientY
+        当前鼠标距离视图的左边框和上边框的距离
+    e.pageX/e.pageY
+        当前鼠标距离页面的左边框和上边框的距离
+    e.offsetX/e.offsetY
+        鼠标距离事件源的左边框和上边框的距离
+事件默认行为及组织方式
+    浏览器的默认行为
+        a的跳转、submit的提交、右键菜单、文本框的输入
+    组织默认行为的方式
+        在事件函数中return false
+        event.preventDefault();
+        event.returnValue=false;
+事件流:页面接受事件的顺序
+    阶段
+        捕获、目标、冒泡
+    阻止冒泡//两种方法
+        e.cancelBubble=true;
+        e.stopPropagation();
+    事件委托机制
+        利用事件冒泡的原理，把某元素的事件，委托给他的父级元素（外层数据）
+dom2级事件处理程序
+    添加事件监听器
+        addEventListener(时间名，处理函数，布尔值)
+            布尔值：false//冒泡
+                    true//捕获
+    移除事件监听器
+        removeEventListener(事件名，处理函数)
+    

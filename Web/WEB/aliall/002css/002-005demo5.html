@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 先给body标签设置样式 */
+        body{
+            color:red;
+        }
+        /* h2和p的文字都变成了红色，而我们只给body设置了文字红色，子元素自动继承了 */
+        h2{
+            color:blue;
+        }
+        /* 当内层元素的样式与外层元素的样式冲突时，内层元素的样式会覆盖外层元素 */
+        /* 只有文本与字体上市属性能被继承，其他的样式属性都不可以被继承 */
+        /* 工作中我们常给body标签设置字体大小及字体颜色，因为body标签是最外层的元素，内层元素会继承外层元素的文本和字体样式样式 */
+    </style>
+</head>
+<body>
+    <div>
+        <h2>1111111</h2>
+        <p>123123123123123123123123123123123123</p>
+        <!-- div.div${Kmckk$}*3 -->
+        <div class="div1">Kmckk1</div>
+        <div class="div2">Kmckk2</div>
+        <div class="div3">Kmckk3</div>
+        <div class="div4">Kmckk4</div>
+        <div class="div5">Kmckk5</div>
+    </div>
+</body>
+</html>

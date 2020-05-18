@@ -1,0 +1,20 @@
+[2020-05-08T20:42:16.734] [DEBUG] cheese - login => username:z3,password:123456
+[2020-05-08T20:42:16.738] [DEBUG] cheese - z3
+[2020-05-08T20:42:16.761] [DEBUG] cheese - { inspect: [Function: inspect] }
+[2020-05-08T20:42:16.763] [DEBUG] cheese - 查询失败
+[2020-05-08T20:42:33.981] [DEBUG] cheese - login => username:admin,password:123456
+[2020-05-08T20:42:33.981] [DEBUG] cheese - admin
+[2020-05-08T20:42:33.985] [DEBUG] cheese - { inspect: [Function: inspect] }
+[2020-05-08T20:42:33.986] [DEBUG] cheese - 查询失败
+[2020-05-08T20:42:37.859] [DEBUG] cheese - login => username:admin,password:123456
+[2020-05-08T20:42:37.859] [DEBUG] cheese - admin
+[2020-05-08T20:42:37.862] [DEBUG] cheese - { inspect: [Function: inspect] }
+[2020-05-08T20:42:37.862] [DEBUG] cheese - 查询失败
+[2020-05-08T20:43:10.148] [DEBUG] cheese - login => username:admin,password:123456
+[2020-05-08T20:43:10.148] [DEBUG] cheese - admin
+[2020-05-08T20:43:10.151] [DEBUG] cheese - { inspect: [Function: inspect] }
+[2020-05-08T20:43:10.151] [DEBUG] cheese - 查询失败
+[2020-05-08T20:43:10.939] [DEBUG] cheese - login => username:admin,password:123456
+[2020-05-08T20:43:10.939] [DEBUG] cheese - admin
+[2020-05-08T20:43:10.942] [DEBUG] cheese - { inspect: [Function: inspect] }
+[2020-05-08T20:43:10.942] [DEBUG] cheese - 查询失败

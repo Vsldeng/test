@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: red;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var myBtn=document.getElementById("btn");
+            myBtn.onclick=function(){
+                open("009-001demo1.html","子窗口","width=400px,height=400px,top=200px,left=200px")
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" id="btn" value="子窗口"/>
+</body>
+</html>

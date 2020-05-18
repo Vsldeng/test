@@ -1,0 +1,26 @@
+cookie
+    http协议
+        超文本传输协议，从web服务器传输超文本到本地浏览器时遵循的传输协议，无状态协议
+        通信协议：
+            tcp/ip四层模型：数据链路 网络 传输 应用层（http属于应用层）
+        无状态协议：
+            每次浏览器向服务器发出请求时，服务器都不记录这个请求
+            有时候我们需要记录一些数据，就用cookie
+    cookie的概念
+        cookie是指缓存在本地客户端的数据
+        重名的cookie会覆盖
+    cookie的基本操作
+        增
+            document.cookie="username=Kmckk;expires="+oDate;
+        删
+            var oDate=new Date();
+            oDate.setDate(oDate.getDate()-3);//日期设置为过去的日期
+            document.cookie="username=Kmckk;expires="+oDate;
+        改
+            document.cookie="username=Kmckk1";
+        查
+            console.log(document.cookie);
+    cookie的封装:见006-002demo2.html
+        setCookie()
+        getCookie()
+        removeCookie()

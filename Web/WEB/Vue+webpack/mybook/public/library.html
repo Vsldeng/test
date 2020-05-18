@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library</title>
+  <style>
+    .grid {
+      margin: auto;
+      width: 900px;
+      text-align: center;
+    }
+
+    .grid table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .grid th,
+    td {
+      padding: 10px;
+      border: 1px dashed orange;
+      height: 35px;
+      line-height: 35px;
+    }
+
+    .grid th {
+      background-color: orange;
+      border: 1px solid green;
+    }
+
+    .grid .in {
+      margin: auto;
+      padding: 10px;
+      border: 1px solid green;
+      height: 30px;
+      background-color: orange;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .grid .total {
+      padding: 10px;
+      height: 30px;
+      border: 1px solid green;
+      background-color: orange;
+    }
+
+    .in .butt {
+      border-radius: 50px;
+      margin: auto;
+    }
+
+    .butt:focus {
+      outline: 0
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="grid">
+      <div>
+        <h1>图书管理系统</h1>
+        <div class="in">
+          <label for="id">编号:</label>
+          <input v-focus type="text" id="id" v-model="newnum" :disabled="flag" />
+          <label for="name">名称:</label>
+          <input type="text" id="name" v-model="newname" />
+          <button @click="add" class="butt">提交</button>
+        </div>
+        <div class="total">图书总数：{{total}}</div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item,index) in books" :key="item.nums">
+            <td>{{item.num}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.time}}</td>
+            <td>
+              <a href="" @click.prevent='replace(item.num)'>修改</a>
+              <span>|</span>
+              <a href="" @click.prevent='pushs(item.num)'>删除</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <script src="./js/axios.js"></script>
+  <script src="./js/vue.js"></script>
+  <script>
+    axios.defaults.baseURL = 'http://localhost:3000/';
+    axios.interceptors.response.use(function (res) {
+      return res.data
+    }, function (error) {
+      console.log(error)
+    })
+    var nums = 0;
+    var vm = new Vue({
+      el: '#app',
+      data() {
+        return {
+          books: [],
+          newnum: '',
+          newname: '',
+          flag: false,
+        }
+      },
+      methods: {
+        add: function () {
+          if (this.flag) {
+            var book = this.books.filter(item => item.num == this.newnum)
+            book[0].name = this.newname
+            book[0].time = new Date()
+            this.flag = false
+            this.newnum = ''
+            this.newname = ''
+          } else if (this.books.filter(item => item.num == this.newnum) != '') {
+
+            alert("图书编号不允许重复，请重新输入")
+            this.newnum = ''
+
+          } else {
+            var book = {}
+            book.num = this.newnum
+            book.name = this.newname
+            book.time = new Date()
+            this.books.push(book);
+            this.newname = ''
+            this.newnum = ''
+          }
+        },
+        pushs: function (num) {
+          this.books = this.books.filter(item => item.num != num)
+        },
+        replace: function (num) {
+          this.flag = true
+          var book = this.books.filter(item => item.num == num)
+          this.newnum = book[0].num
+          this.newname = book[0].name
+        },
+        query: async function () {
+          this.books = await axios.get('books')
+        }
+      },
+      directives: {
+        focus: {
+          inserted: function (el) {
+            el.focus()
+          }
+        }
+      },
+      computed: {
+        total: function () {
+          return this.books.length
+        }
+      },
+      mounted: function () {
+        query()
+        //data从后台获取，mounted是页面上的Vue结构挂载完成后自动触发的钩子函数，这里进行假数据自动填充
+      }
+    })
+  </script>
+</body>
+
+</html>

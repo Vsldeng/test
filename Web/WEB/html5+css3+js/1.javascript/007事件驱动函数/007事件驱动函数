@@ -1,0 +1,13 @@
+在和页面交互的过程中所调用的函数，该函数称为事件驱动函数
+和页面进行交互的行为都称为事件
+找到标签节点
+var obtn=document.getElementById('btn');
+
+window.onload=function(){
+  //写在onload的代码，在页面加载完成以后执行
+  //给按钮添加事件驱动函数
+  var oBtn=document.getElementById("btn");
+  oBtn.onclick=function(){
+    alert("单机");//onclick在按钮被点击后触发
+  }
+}

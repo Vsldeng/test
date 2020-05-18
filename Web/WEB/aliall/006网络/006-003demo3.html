@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="cookie.js"></script>
+    <script>
+        window.onload=function(){
+            var aInput=document.getElementsByTagName("input");
+            if(getCookie("username")){
+                aInput[0].value=getCookie("username");
+                aInput[1].value=getCookie("password");
+            }
+            aInput[3].onclick=function(){
+                var username=aInput[0].value;
+                var password=aInput[1].value;
+                if(aInput[2].checked){
+                    setCookie("username",username,7);
+                    setCookie("password",password,7);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    用户名:<input type="text">
+    密码:<input type="password">
+    <label><input type="checkbox">七天免登录</label>
+    <input type="button" value="登录">
+</body>
+</html>

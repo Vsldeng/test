@@ -1,0 +1,89 @@
+正则表达式
+    由普通字符及特殊字符组成的对字符串进行过滤的逻辑公式
+    创建方式
+        字面量的方式
+            var reg=/abc/;
+        构造函数的方式
+            var reg=new RegExp("abc");
+    正则表达式的方法
+        test方法//正则表达式的方法
+            var str="abc";
+            var flag=reg.test(str);//检测str是否含有正则表达式规则所得到的子串
+        exec方法//正则表达式的方法,将匹配成功的内容放到数组里，没有则返回null
+            var reg=/good/g;//有g修饰符，匹配到一个后，下次使用exec方法时在上次匹配到的位置开始继续查找（这是与match的不同）
+            var str="good good study";
+            reg.exec(str);
+        match方法：字符串方法
+            str.match(reg);//返回abc
+        search方法:查找符合规则的子串的位置，只返回一个匹配的位置
+            var reg=/abc/gi;
+            var str="123abc456";
+            console.log(str.search(reg));
+        split方法
+            var reg=/good/gi;
+            var str="good good study!";
+            str.split(reg)
+        replace方法
+            var reg=/tmd/gi;
+            var str="abc tmd abc TMD";
+            str.replace(reg,"*");
+    给正则表达式添加修饰符
+        g
+            全局匹配
+                var reg=/abc/g;
+                var str="abcabc";
+                str.match(reg);
+        i
+            忽略大小写
+                var reg=/abc/i;
+                var str="AbcABCabc";
+                console.log(str.match(reg));//返回一个Abc，加上g修饰符，可以匹配到整个字符串
+    正则表达式特殊的元字符
+        .
+            用来表示除了换行符的所有单个字符
+                var reg=/g..gle/gi;
+                var str="googleg--gle";
+                console.log(reg.test(str));
+        *
+            重复多次匹配，匹配任意次（0-n）
+                var reg=/g*gle/gi;
+                var str="gle"
+                console.log(reg.test(str));
+
+        +
+            至少有一次重复匹配
+                var reg=/g+gle/gi;
+                var str="gle";
+                console.log(reg.test(str));
+        ?
+            进行0或者1此匹配
+                var reg=/g?gle/gi;
+                var str="gle";
+                console.log(reg.test(str));
+        //元字符和其前面的字符组合
+        []的含义：表示可以出现的范围
+            var reg=/[0-9]/gi;//匹配0-9中的任意数字
+            var str="ab0c";
+            reg.test(str);
+        \w数字字母下划线，等同于[0-9a-zA-Z_]        \W非数字字母下划线
+        \d表示数字[0-9]        \D非数字
+        \s匹配空格
+        {m,n}至少匹配m次，至多匹配n次  {m}匹配m次  {m,}至少匹配m次
+            var reg=/go{3,6}gle/gi;
+            var str="gooooogle";
+            console.log(reg.test(str));//匹配o
+        /^g匹配g开头,g$/匹配g结尾
+            var reg=/^g.+g$/
+        |或,分割多个匹配
+        ()将内容作为一个整体进行匹配(作为一个分组)
+            var reg=/(google){4,6}/gi
+            var str="googlegooglegooglegoogle";
+            RegExp.$1；//获取一个分组内容
+        //$1 $2//利用分组方法交换分组内容
+            var reg=/(.*)\s(.*)/;
+            var str="taobao baidu"
+            console.log(str.replace(reg,"$2 $1"))
+        
+
+            
+        

@@ -1,0 +1,106 @@
+一、模块化的相关规范
+  传统开发模式的问题：命名冲突，文件依赖//通过模块化解决上述问题
+    概念：模块化就是把一个功能单独的封装到一个模块中，模块之间相互隔离，但是可以通过特定的接口，公开内部成员，也可以依赖别的模块
+      优点：方便代码的重用，从而提升开发效率，而且方便后期维护
+  浏览器端模块化规范
+    AMD :Require.js
+    CMD: Sea.js
+  服务器端模块化规范
+    CommonJS
+      模块分为单文件模块与包
+      模块成员导出：module.exports和exports
+      模块成员导入：require('模块标识符')
+  ES6模块化规范
+    浏览器与服务器端通用的模块化开发规范
+      每个js文件都是一个独立的模块
+      导入模块成员使用import关键字
+      暴露模块成员使用export关键字
+    大一统的模块化规范-ES6模块化
+      Node.js中通过babel体验ES6模块化
+        babel一种兼容工具，将你写出的es6代码，转化为es5以兼容目前大部分的浏览器
+          npm install -D @babel/core @babel/cli @babel/preset-env @babel/node
+          npm install -D @babel/ployfill
+          项目根目录创建文件babel.config.js
+            babel.config.js:  
+              const presets=[
+                ["@babel/env",{
+                  targets:{
+                    edge:"17",
+                    firefox:"60",
+                    chrome:"67",
+                    safari:"11.1"
+                  }
+                }]
+              ];
+              module.exports={presets};
+          npx babel-node index.js
+      默认导出与默认导入
+        export default{
+          a,
+          c,
+          show
+        }
+        import m1 from './m1.js' 
+
+      按需导出与按需导入
+        export let s1='aaa'
+        export let s2='ccc'
+        export function say(){
+          console.log('ooooooo')
+        }//默认倒入不显示按需导出的内容
+        import m1,{s1,s2,say} from './m1.js'
+        console.log(m1)
+        console.log(s1)
+        export default{'只能用一次默认导出'}
+        export let s1='aaa'//按需导出一个模块可以多次导出
+      直接导入并执行模块代码
+        import'./m2.js'//直接执行m2.js，不去取得m2暴露的任何成员
+二、webpack基本用法
+  文件依赖关系错综复杂
+  静态资源请求效率低
+  模块化技术支持不好
+  浏览器对高级JavaScript特性兼容成都较低
+  概念：前端项目构建工具，可以解决目前的问题
+    提供了有好的模块支持，性能优化，处理js兼容问题，代码压缩混淆
+  
+三、Vue单文件组件
+  传统组件的问题：
+    全局定义的组件必须保证组件名字不重复
+    字符串模板缺乏语法高亮，在html有多行的时候，需要丑陋的\
+    不支持CSS意味着当HTML和JavaScript组件化时，CSS被遗漏
+    没有构建步骤限制，只能使用HTML和ES5 JavaScript，而不能使用预处理器，如：babel
+  使用Vue单文件组件方案解决上述问题
+    a.Vue:
+      <template>
+        //这里是vue模板内容
+      </template>
+      <script>
+        //这里定义Vue组件的业务逻辑
+      </script>
+      <style scoped>
+        //这里定义组建的样式
+      </style>
+
+四、Vue脚手架
+  支持我们通过命令的形式快速的生成Vue项目基础架构
+  全局配置下安装 @vue/cli   进入管理员模式！！ npm install -g @vue/cli
+  vue脚手架的基本使用
+    vue create my-project(交互式创建vue项目，有各种选项)
+    vue ui(基于图形化界面，键盘...打开界面)
+    
+五、Element-UI的基本使用
+  一套为开发者、设计师和产品经理准备的基于Vue2.0的桌面端组件库
+  官网地址：http://element-cn.eleme.io/#/zh-CN
+  手动安装:
+    安装：element-ui 
+    导入组件库：import ElementUI from 'element-ui';
+    导入组件相关样式：import 'element-ui/lib/theme-chalk/index.css';
+    配置Vue插件Vue.use(ElementUI);
+  自动安装：
+    vue ui 打开图形化界面
+    通过vue项目管理器，进入具体的项目配置面板
+    点击插件-添加插件，进入具体的插件查询面板
+    搜索vue-cli-plugin-element并且安装
+    配置插件，实现按需导入，从而减少打包后项目的体积
+      import Element选择按需导入
+      

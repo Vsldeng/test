@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 1000px;
+            border:1px solid red;
+            background:green;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            document.onkeypress=function(){
+                console.log('press');
+            }
+            document.onkeydown=function(){
+                console.log('down');
+            }
+            // document.onkeyup=function(){
+            //     console.log('up');
+            // }
+            document.onkeydown=function(e){
+                var e=e||event;
+                console.log(e.ctrlKey,e.altKey,e.shiftKey);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

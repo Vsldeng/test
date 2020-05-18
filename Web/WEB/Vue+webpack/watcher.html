@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model.lazy="uname" />
+    <span>{{tip}}</span>
+  </div>
+  <script src=".\node_modules\vue\dist\vue.js"></script>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data() {
+        return {
+          uname: '',
+          tip: ''
+        }
+      },
+      methods: {
+        checkName: function (uname) {
+          var that = this//setTimeout函数内部的this指向windows
+          setTimeout(function () {
+            //模拟接口调用
+            if (uname == '李玮辰是鳖') {
+              that.tip = '没有错，确实是这样'
+            } else {
+              that.tip = '不对不对'
+            }
+          }, 2000)
+        }
+      },
+      watch: {
+        uname: function (val) {
+          //调用后台接口，验证用户名的合法性
+          this.checkName(val)
+          this.tip = '我康康你说的对不对哈...'
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

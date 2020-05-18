@@ -1,0 +1,22 @@
+音频audio：html5提供播放音频文件的标准
+    controls控制器童工播放、暂停和音量控制
+    标签:<audio>定义声音//<audio src="raw/3.mp4" controls="controls">浏览器不支持</audio>
+         <source>规定多媒体资源、可以是多个
+         <audio controls="controls">
+            <source src="raw/3.mp4">
+            <source src="raw/3.ogg">
+         </audio>
+视频video：html5提供了展示视频的标准
+    controls 属性供添加播放暂停和音量控件
+    标签:<video>定义声音
+         <source>规定多媒体资源、可以是多个
+拖放
+    抓取一个对象拖到另一个位置
+    设置元素为draggable="true"
+    ondragstart和setData()拖动什么
+    ondragover放到何处
+    ondrop进行放置
+画布
+    一个矩形区域，可以控制每一个元素
+    不是图像，只是一个承载图像的画布
+    canvas

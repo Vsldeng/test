@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>入口函数的区别</title>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+        // window.onload=function(ev){
+        //     //通过原生js入口函数获取dom元素
+        //     var img =document.getElementsByTagName("img")[0];
+        //     console.log(img);
+        //     //通过原生js入口获取dom元素的宽高
+        //     var width=window.getComputedStyle(img).width;
+        //     console.log(width);
+        // }
+        // $(document).ready(function(){
+        //     //通过jQuery入口函数拿到Dom元素
+        //     var $img=$("img");
+        //     console.log($img)
+        //     //通过jQuery入口函数拿到元素的宽高
+        //     var $width=$img.width();
+        //     console.log($width);
+        // })
+        // window.onload=function(ev){
+        //     alert("hello1");
+        // }
+        // window.onload=function(ev){
+        //     alert("hello2");
+        // }
+        //后写的会覆盖先写的，弹出hello2
+        $(document).ready(function(){
+            alert(1);
+        })
+        $(document).ready(function(){
+            alert(2);
+            console.log(2);
+        })
+        
+    </script>
+</head>
+<body>
+    <img src="./src/1.PNG" alt="nonono" title="图片">
+</body>
+</html>

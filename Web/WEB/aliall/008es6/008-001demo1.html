@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #test{
+            display: block;
+            width:300px;
+            height:300px;
+            margin:0 auto;
+            background-color: red;
+        }
+    </style>
+    <script src="wenben.js"></script>
+    <script>
+        window.onload=function(){
+            //es5
+                // var obj={name:"join",age:20};
+                // var name=obj.name;
+                // var age=obj.age;
+                // console.log(name+"的年龄是"+age);
+            //es6
+                // var obj={name:"join",age:20};
+                // let{name,age}=obj;
+                // console.log(`${name}的年龄是${age}`);
+            //生成多行字符串
+                var arr=[0,1,2,3,4];
+                var oUl=document.getElementById("test");
+                var html="";
+                // for(var i in arr){
+                //     html+="<li>"+arr[i]+"</li>";
+                // }
+                for(var i in arr){
+                    html+=`<li>
+                        <a href="">${arr[i]}</a>
+                        <p>111</p>
+                    </li>`;
+                }
+                oUl.innerHTML=html;
+        }
+    </script>
+</head>
+<body>
+    <div id="test"></div>
+</body>
+</html>

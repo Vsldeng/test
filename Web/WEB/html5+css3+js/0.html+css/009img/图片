@@ -1,0 +1,34 @@
+三原色（1-255）
+每个像素点保存一个信息：R：G：B：
+分别表示三种颜色以何种浓度混合
+
+常见的有
+  jpg png gif
+    gif:
+      支持动画
+      只有全透明和不透明两种模式
+      只有256种颜色
+    jpg
+      有损压缩算法
+      没有透明或不透明
+      体积较小
+    png
+      采用无损压缩算法
+      体积相对也较小
+      支持背景透明
+      不支持动画
+    svg
+      只记录图片的信息，不根据像素记录
+      很难保存不规则的图片
+      一般保存较简单的图片
+      不失真，且体积小
+设置背景图片
+  html,body{
+    margin:0;
+    height:100%;
+  }
+  body{
+    background-image:url(imgs/dong.gif)
+    background-repeat:no-reapeat;
+    background-position:center;
+  }

@@ -1,0 +1,115 @@
+let的使用
+    用法:let a=1;
+        和var的区别
+            存在块级作用域{}
+            不存在声明提升
+            不允许重复声明（包括普通变量和函数参数）
+const的使用
+    用来声明常量，和let用法一样
+    与let的区别
+        值不能被修改
+解构赋值
+    按照一定模式，从数组和对象中提取值，对变量进行赋值
+    数组
+        let [a,b,c]=[1,2,3];
+        console.log(a,b,c);
+        ///////////////
+        let [a=2,b]=[3];//输出a，b为3，undefine（因为3在后续赋值给了数组的第一个元素a
+            如果，赋值数为undefine或不存在的值，那么a的值会保持默认值
+    对象
+        let {a,b}={a:"111",b:"222"};
+        let {a:b}={a:"111"};//b也为111
+        let {a,b=5}={a:"1"};
+模板字符串
+    字符串拼接
+        1.将变量或表达式直接嵌入字符串
+        2.通过${}符号选择嵌入变量
+        3.使用反引号('')拼接多行字符串
+                var obj={name:"join",age:20};
+                let{name,age}=obj;
+                console.log(`${name}的年龄是${age}`);
+    生成多行字符串
+        var html="";
+        for(var i in arr){
+            html+=`<li>
+                //用这种html格式书写多个标签，可以正常书写
+                //使用一行的写法，会报错
+                <a src="">${arr[i]}</a>
+                <p>${arr[i]}</p>
+            </li>`
+        }
+箭头函数（Arrow Function）
+    只含有一个表达式的写法
+        let foo=()=>1;//等于：function foo(){return 1};
+        传参
+            let foo=(a)=>a;
+    含有多条语句
+        let foo=(a)=>{
+            let b=10;
+            return a+b;
+        }
+    this的指向问题
+        指向定义时所在的作用域，而不是执行时所在的作用域
+set结构和map结构
+    set结构(去重数组)
+        定义方式
+            var set=new Set([1,2,2,3,4,2]);//结果是[1，2，3，4]
+        扩展运算符...
+            var arr=[...set];//arr得到数组形式的set（arr的_proto_是Array）
+        遍历方式//和for...in的不同是，i是数组内容，而不是索引
+            for(let i of set){
+                consolo.log(i);
+            }
+        基本使用方法
+            set.size;//长度
+            set.add(0);//新增加一个0元素
+            set.delete(0);//删除一个0元素
+            set.has(0);//set中是否含有0这个元素
+            set.clear();//清空set这个去重数组
+        其他使用方法
+            set.keys();//返回键名的遍历器
+                for(let item of set.keys()){
+                    console.log(item);//返回键名
+                }
+            set.values();//返回键值的遍历器
+            set.entries();//返回键值对的遍历器
+            set.forEach();//使用回调函数遍历每个成员
+    map结构
+        var map=new Map([["name","john"],["age",20]]);//定义了两个键值对
+        map.set("sexy","male");//增加一个键值对
+        基本使用方法
+            map.set(key,value);//增加一个键值对
+            map.get(key);//根据key键名取得对应的值
+            map.delete(key);//根据对应的key删除键值对
+            map.has(key);
+            map.clear();
+        其他使用方法
+            map.keys();
+            map.values();
+            map.entries();
+            map.forEach();
+生成器函数
+    函数名前面加一个*
+    关键字yield用来暂停函数的运行，并返回数值
+        function* foo(x){
+            yield x+1;
+            yield x+2;
+            return x+3;
+        }
+        var f=foo(1);//f为生成器函数foo返回的迭代器对象
+        console.log(f.next());//每次执行f.next()都会返回下个yield暂停后的返回值
+    f.next()带参数
+        可以当作上一次yield返回值的整体替换
+类class
+    通过类来形成一些集体的对象
+    class Person{
+        constructor(name){
+            this.name="name";
+        }
+        sayHello(){
+            console.log(this.name);
+        }
+    }
+    var person=new Person("john");
+    cnosole.log(person.name);
+    person.sayHello();

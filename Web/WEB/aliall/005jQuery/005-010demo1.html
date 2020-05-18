@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+        $(function(){
+            $('div').css("width","100px");
+            $('div').css("height","100px");
+            $('div').css("background","red");
+            $('div').css("width","100px").css("background","red");//一般不超过三步，三步后建议分开设置
+            $('div').css({
+                width:"100px",
+                height:"100px",
+                background:"red"
+            })
+            $('div').css('width');//返回width样式的值
+        })
+    </script>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

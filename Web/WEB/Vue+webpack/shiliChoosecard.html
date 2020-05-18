@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChooseCard</title>
+  <style>
+    .choosecards {
+      border: 1px solid blue;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .choosecards .active {
+      background-color: brown;
+    }
+
+    .card {
+      border: 1px solid blue;
+      cursor: pointer;
+      margin: 0 auto;
+    }
+
+    .image {
+      text-align: center;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='app'>
+    <div id='choosecards' class='choosecards'>
+      <span v-for="(item,index) in fruit" :key="item.id" :class="['card', item.id==choose ? 'active':'']"
+        @click="change(item)">{{item.name}}</span>
+    </div>
+    <div class="image">
+      <img :src="path">
+    </div>
+  </div>
+
+  <script src=".\node_modules\vue\dist\vue.js"></script>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data() {
+        return {
+          fruit: [{
+            name: '李玮辰高兴',
+            id: 1,
+          }, {
+            name: '李玮辰呲牙',
+            id: 2,
+          }, {
+            name: '李玮辰生气',
+            id: 3,
+          }],
+          choose: '1',
+          path: './src/img/1.jpg',
+        }
+      },
+      methods: {
+        change(item) {
+          this.path = './src/img/' + item.id + '.jpg'
+          this.choose = item.id
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

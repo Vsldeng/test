@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function* foo(x){
+            yield x+1;
+            yield x+2;
+            return x+3;
+        }
+        var f=foo(1);
+        console.log(f.next());//每次执行f.next()都会返回下个yield暂停后的返回值
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

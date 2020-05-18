@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.5.1.min.js"></script>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        div{
+            width:100px;
+            height:100px;
+            border:1px solid #000;
+        }
+    </style>
+    <script>
+        $(function(){
+            var btns=document.getElementsByTagName("button");
+            btns[0].onclick=function(){
+                $('div').html("<p>我是一个段落<span>我是一个span</span></p>");
+            }
+            btns[1].onclick=function(){
+                console.log($('div').html());
+            }
+            btns[2].onclick=function(){
+                $('div').text('<p>我是一个段落<span>我是一个span</span></p>');
+            }
+            btns[3].onclick=function(){
+                console.log($('div').text());                
+            }
+            btns[4].onclick=function(){
+                $('input').val("请输入内容");
+            }
+            btns[5].onclick=function(){
+                console.log($('input').val());
+            }
+        })
+    </script>
+</head>
+<body>
+    <button>设置html</button>
+    <button>获取html</button>
+    <button>设置text</button>
+    <button>获取text</button>
+    <button>设置value</button>
+    <button>获取value</button>
+    <div></div>
+    <input type="text">
+</body>
+</html>

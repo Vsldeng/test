@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            position:relative;
+            width:500px;
+            height:1000px;
+            border:1px solid #cecece;
+        }
+        span{
+            position: absolute;
+            bottom:0;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            function removeSpanceNode2(parent){
+                var nodes=parent.childNodes;
+                for(var i=nodes.length-1;i>=0;i--){
+                    if(nodes[i].nodeValue==3&&/^\s+$/.test(nodes[i].nodeValue)){
+                        parent.removeChild(nodes[i]);
+                    }
+                }
+            }
+            var myDiv=document.getElementsByTagName("div")[0];
+            removeSpanceNode2(myDiv);
+            var mySpan=myDiv.children[0];
+            myDiv.onmousemove=function(e){
+                var y=e.clientY;
+                var x=e.clientX;
+                mySpan.innerHTML=x+"px"+","+y+"px";
+            }
+            myDiv.onmouseout=function(){
+                mySpan.innerHTML="";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <span></span>
+    </div>
+</body>
+</html>

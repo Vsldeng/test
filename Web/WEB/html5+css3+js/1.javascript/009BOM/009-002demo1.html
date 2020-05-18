@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            var myBtn=document.getElementById("btn");
+            myBtn.onclick=function(){
+                // location.assign("http://www.baidu.com");
+                //location.reload();//传参，如果true强制加载（从服务器源头重加载，忽略浏览器缓存）
+                location.replace("http://www.baidu.com");
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" id="btn" value="点击">
+</body>
+</html>

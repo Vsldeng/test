@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .uls {
+      border: 1px solid black;
+      margin: auto;
+      width: 300px;
+      height: 600px;
+    }
+
+    .uls li {
+      clear: both;
+    }
+
+    .uls li:nth-of-type(odd) {
+      float: right;
+      background-color: white;
+      color: black;
+      height: 30px;
+    }
+
+    .uls li:nth-of-type(even) {
+      float: left;
+      background-color: green;
+      color: white;
+      height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="uls">
+    <li>0</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+  </ul>
+</body>
+
+</html>
+//浮动元素排列，只参考他的前一个元素
+//浮动元素不覆盖文字，不覆盖图片，不覆盖表单元素

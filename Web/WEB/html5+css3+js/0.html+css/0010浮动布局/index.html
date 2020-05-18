@@ -1,0 +1,71 @@
+//浮动元素会脱离网页文档，与其他元素重叠，但不遮挡文字
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .green {
+      background-color: green;
+      width: 100px;
+      height: 100px;
+      float: left;
+    }
+
+    .red {
+      background-color: red;
+      width: 200px;
+      height: 150px;
+    }
+
+    .a {
+      background-color: green;
+      width: 20%;
+    }
+
+    .b {
+      background-color: red;
+      width: 30%;
+    }
+
+    .c {
+      width: 50%;
+      background-color: blue;
+    }
+
+    .a,
+    .b,
+    .c {
+      float: left;
+      height: 200px;
+    }
+
+    .hh {
+      background-color: black;
+      height: 500px;
+    }
+
+    .outer {
+      border: 4px dashed black;
+      overflow: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <p>文字环绕效果</p>
+  <div class="green"></div>
+  <div class="red">asssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</div>
+
+  横向顺序排列
+  <div class="outer">
+    <div class="a"></div>
+    <div class="b"></div>
+    <div class="c"></div>
+  </div>
+  <div class="hh"></div>
+</body>
+
+</html>

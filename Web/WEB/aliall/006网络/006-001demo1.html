@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //查询cookie
+        console.log(document.cookie);
+        //增加cookie
+        document.cookie="username=Kmckk";
+        var oDate=new Date();
+        oDate.setDate(oDate.getDate()+3);
+        document.cookie="username=Kmckk;expires="+oDate;
+        //修改
+        document.cookie="username=Kmckk1";
+        //删除
+        var oDate=new Date();
+        oDate.setDate(oDate.getDate()-3);//日期设置为过去的日期
+        document.cookie="username=Kmckk;expires="+oDate;
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

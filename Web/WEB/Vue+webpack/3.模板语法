@@ -1,0 +1,128 @@
+一、页面渲染
+模板+数据=静态HTML
+这个过程叫页面渲染
+
+二、前端渲染方法
+1.原生js拼接字符串
+  不同开发人员写的代码有差异，不利于维护
+2.使用模板引擎
+  引入新的语法规则，代码相对规范，易于维护
+  没有专门提供事件处理机制
+3.Vue
+  插值表达式{{数据名}}
+  指令
+    什么是自定义属性：js原生中，data开头命名的非提供指令
+    vue指令本身就是自定义属性
+    指令格式：v-开始
+    （1）v-cloak
+        提供样式
+        [v-cloak]{
+          display:none;
+        }
+        在插值表达式所在的标签中，添加v-cloak
+          <div v-clock>{{msg}}</div>
+        背后的原理：先通过样式隐藏内容，在内存中进行值的替换，再显示最终的结果
+    （2）v-text
+        <div v-text='msg'></div>
+    （3）v-html(容易出现跨站攻击)
+        msg="<div>aaa</div>"
+        <div v-html='msg1'></div>
+    （4）v-pre
+        显示原始信息，跳过编译过程
+    数据响应式
+      html5的响应式（屏幕大小自适应）
+      数据的响应式（数据的变化导致页面内容的变化）
+      数据绑定：将数据填充到标签中
+      v-once：只编译一次，显示内容后不再根据数据变化，进行响应变化
+        应用：如果现实的信息后续不需要再修改，就使用v-once，提高性能
+    双向绑定数据
+      用户改数据，页面变，页面变化，数据变
+      <div id="app">{{msg}}</div>
+      <input type="text" v-model='msg'/>
+      var vue=new Vue({
+        el:"#app",
+        data:{
+          msg:1,
+        }
+      })
+    MVVM 
+      View->Model (DOM Listeners)
+      Model->View(Data Bindings)
+      ViewModel是上述两种管理方式，通过Vue来具体实现
+
+  事件绑定
+      v-on:click="num++"
+      @click="num++"
+      @click="handle"
+      @click="handle(123)"
+      @click="handle(123,$event)//最后一个，放事件对象，固定写法，写在最后
+      var vm=new Vue({
+        el:'#app',
+        data:{
+          num:0
+        },
+        methods:{
+          handle:function(a，event){
+            console.log(a)
+            console.log(event.target.innerHTML)
+            this.num++
+          }
+        }
+      })
+      如果事件直接绑定函数名称，那么默认传递事件对象，作为事件函数的第一个参数
+      如果事件绑定函数调用，那么事件对象必须作为最后一个参数进行显式传递，并且事件对象名称固定$event
+      
+      事件修饰符
+        阻止冒泡：event.stopPropagation
+        使用事件修饰符：@click.stop:'handle1',上层handle0会被阻止冒泡调用
+        
+        阻止默认行为：handle2:function(event){
+          event.preventDefault();
+        }
+        使用时间修饰符：@click.prevent="handle2"
+
+        @keyup.enter='handleSubmit'//键盘事件，点击回车触发
+        不在按键范围内的案件
+        Vue.config.keyCode.aaa=65(a按键的唯一标识符，所有的按键都具有唯一标识符)
+        @keyup='handle.aaa'
+          handle:function(event){
+            console.log(event.keyCode)
+          }
+        
+  属性绑定
+    获取设置属性
+      原生js：
+            var test=documen.getElementById('test)
+            test.setAttribute('test','aaa')
+            test.getAttribute('test)
+      Vue：
+        <div v-bind:test="msg"></div>
+        <div :test="msg"></div>  
+      
+  样式绑定
+    通过class样式绑定，处理样式
+      对象绑定/数组绑定
+      <div :class="[activeClass,errorClass,{test:istest}]></div>
+      对象绑定和数组绑定可以结合使用
+      class绑定得值可以简化操作
+      默认的class如何处理?会被保留
+    通过style样式处理
+      对象绑定/数组绑定
+      <div :style='{border:borderStyle,width:widthStyle,height:heightStyle}'></div>
+      数组绑定，相同属性会被覆盖
+  分支循环结构
+    v-if
+    v-else
+    v-else-if
+      <div v-if='score>=90'>优秀</div>
+      <div v-else-if='score<90&&scroe>=80'>良好</div>
+      <div v-else>差</div>
+    v-show
+      <div v-show='flag'>okok</div>
+    判断结构区别：上述，不加载不满足条件的标签
+            下述，不论flag是true或false，都加载标签，但会根据flag隐藏或显示（display:true/false)
+    v-for
+      <div v-for='(item,index) in array' :key="index"></div>
+      这里得key一般不绑定index，涉及数组内容删除时，会导致错误，最好在数组基础上，创建对象数组，设置id，用item.id来确定更保险
+    v-for结合v-if等使用
+      <div v-if='item.id==1' v-for='(item,index) in array' :key='item.id'>{{item.id+':'+item.value}}</div>

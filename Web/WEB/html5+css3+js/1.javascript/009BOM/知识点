@@ -1,0 +1,52 @@
+概念：
+    BOM是浏览器模型（整个浏览器就是BOM）
+    通过window对象来控制BOM，window对象是全局对象，相当于我当前浏览器打开的一个窗口
+    window对象下的属性和方法：
+        浏览器可以通过调用系统的对话框，向用户显示信息
+        系统提供三个函数完成系统对话框操作
+            alert(11);//直接弹出警告框，window下的函数，window下的函数都可以省略window直接去调用
+            confirm(11);//弹出带有确定和取消的警告框；
+                确定返回true，取消返回false
+            prompt("提示信息",0);弹出一个带输入的对话框,0是默认值
+                确定时返回值是我们输入的内容，取消返回null
+        open方法
+            open(加载的url，窗口的目标，一串具有特殊意义的字符串)
+                url：前往的地址
+                窗口的目标：给打开的新窗口起名字，再次打开会在这个起好名字的窗口打开
+                第三个参数：设置我当前打开的窗口的参数
+            父窗口打开子窗口
+                子窗口会默认设置一个opener（父窗口的对象）
+        location对象
+            location
+            window.location
+            window.document.location
+            概念：浏览器上的地址栏输入框，提供了当前窗口加载的文档的信息，和一些导航
+            属性：
+                url：统一资源定位符（快递包上的一个地址）
+                    location.hash：锚点（url中#后面的内容，用来实现页内跳转）
+                    host:通过ip可以在全球范围内找到我这台电脑所使用的网络地址
+                        主机号：当前电脑使用的软件，在当前电脑内唯一的标识
+                    location.hostname 主机名 （域名/IP）
+                        存放我当前主机的地址
+                        www.baidu.com（ip难以记忆，通过域名解析器，解析域名成ip，域名就是ip好看的名字）
+                    location.pathname 当前存放文件的路径
+                    port端口号
+                    location.protocol 协议
+                        http：网络协议
+                        file：本地文件协议
+                    search 查询字符串，跟在问号后面的
+                    
+                    url
+                        protocol：host：port/pathname?search#hash
+            方法：
+                assign();//跳转到指定的地址
+                reload();//重载当前的url
+                replace();//用新的URL替换当前页面（和assign不同在于，不可以通过后退返回刚刚的页面，去除了跳转缓存）
+        history对象
+            概念：保存用户上网的记录（导航栏左侧的前进后退按钮）
+            history.length 返回历史记录条数
+            方法：
+                history.back();//返回上一条历史记录（后退按钮）
+                history.forword();//前进到下一条记录（前进按钮）
+                history.go();//参数是0重载当前页面，正数前进对应数量的记录，负数后退对应数量的记录
+            

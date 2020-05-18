@@ -1,0 +1,307 @@
+css
+    简介：层叠样式表
+    作用：给html设置外观或者样式
+    书写规则：
+        选择器：{属性:值;属性:值;}
+            选择器和一个大括号组成
+            大括号里是由；做分割的键值对组成
+            css属性一般不加引号
+            数值一般需要单位px（像素）
+    书写方式：css代码应该书写在什么地方
+        嵌入式：
+            将css代码嵌入到html中，通过html的style标签将css代码潜入
+            type="text/css"//html5中可以省略该属性不写
+            style可以写在任何地方，但一般情况写在head标签里
+        外链式：
+            单独写一个css文件
+            在head标签里使用<link />标签，将这个css连接到html文件中
+            css文件不能单独运行，必须依赖于html文件
+            <link rel="stylesheet" href="css文件的位置">
+            rel属性是关系的意思，与后面文件是什么关系，stylesheet样式表的意思
+            f12查看network选项，查看文件，保证css被正确引入
+            一个html文件可以有多个link标签
+        行内式：
+            将css代码书写在html标签的style属性中
+            style属性是通用属性（每个标签都拥有这个属性）
+            行内式只作用于当前行内元素
+            外链式作用域整个html文件
+    css注释：
+        /*注释的内容*/
+        快捷键ctrl+斜线（/）
+    选择器：通过一定语法规则，选取到对应的html标签，然后给对应的html标签设置样式
+        通用选择器：
+            *{
+                键值对；
+                键值对；
+            }
+            匹配到所有的html标签，并且使用
+        标签选择器：
+            body{
+                键值对；
+                键值对；
+            }
+            匹配到html中所有的body标签
+        属性选择器：
+            html标签上设置class属性
+            .app{
+                键值对；
+                键值对；
+            }//css建议使用属性选择器，不建议使用id选择器
+        id选择器：
+            html标签上设置id属性
+            #app{
+                键值对；
+                键值对；
+            }
+            id一般留给js去使用，class一般给css使用
+    尺寸样式属性：
+        height（auto，自动，浏览器会自动计算高度，px定义，%百分比定义
+        width（同上）
+        行内元素无法设置，块级元素可以设置
+    文本属性：
+        color给文本设置颜色#fff/rgb(...)/red
+        text-align设置文本的水平对齐方式，可以设置三种值，left right center
+        text-decoration设置文本修饰线，四个值none underline overline line-through
+        text-transform用于大小写转换，首字母大写 capitalize（首字母大写）uppercase lowercase
+        text-indext 设置首行缩进，数值大小12px/汉字占位2em，一个em一个汉字占位，允许负值
+        letter-spacing 字符之间的间距，使用px设置
+        word-spacing 单词之间的间距，使用px设置
+        line-height 设置行高，px或者百分比，行高的主要作用是用来设置文本的垂直方向居中对齐
+            行高与高度一样，就可以实现文本垂直方向居中
+    字体属性：
+        font-style 设置文字为斜体，该属性有两个值，normal和italic
+        font-weight设置文字的粗细，normal blod或者用px设置
+            normal=400px
+            bold=700px
+            100px-900px，ie不支持细分，
+            inherit规定应该从父元素继承字体的粗细
+        font-size设置文字大小，用固定值px
+        font-family给文本设置字体font-family:"微软雅黑"
+            写多个字体时候，先到先用，都没有，默认用宋体
+        font：italic bold 14px "微软雅黑"
+            必须有顺序
+            必须有空格
+            style weight size family的顺序
+    复合选择器：
+        多元素选择器，用，隔开
+            p,h1,h2,.p2{
+                margin:0px;//外边距设置为0
+            }
+        后代元素选择器，用空格
+            div .choose{
+                background-color:red;
+                /*给div下的所有class属性为choose的元素添加红色背景元素
+            }
+        子元素选择器，匹配直系子元素
+            div>.son{
+                background-color:red;
+                匹配div下class等于son的元素
+            }
+        相邻元素选择器
+            div+span{
+                background-color:red;
+                匹配所有紧随div元素的同级span标签
+            }
+    列表样式属性
+        无序列表（有序列表）
+            list-style-type
+                取值none disc square circle 默认是disc
+            list-style-position
+                inside outside小圆点在里面，在外面
+            list-style-image 将列表的标记设置为图片
+                list-style-image：url（图片的地址）
+            list-style square inside url（图片的地址）
+                简写属性，其属性值个数不定，位置也不定
+    伪类选择器
+        给超链接的不同状态设置样式（a标签）
+        :link正常状态
+        :visited访问过后状态
+        :hover鼠标悬停状态
+        :acive激活状态（点击的一瞬间）
+        超链接不同状态要有顺序
+            先link visited hover active
+        一般去掉超链接下划线，再设置颜色
+    属性选择器
+        [attr]：所有具有attr属性的元素都被选择
+        [attr=center]：所有attr属性为center的元素都被选择
+        [attr^=ce]：所有attr属性以ce开头的所有元素被选择
+        [attr$=ter]：所有attr属性以ter结尾的所有元素被选择
+        [attr*=ent]：所有attr属性包含ent的所有元素被选择（不区分大小写）
+    css的继承性
+        见002-005demo5
+    优先级
+        根据权重选择
+            行内样式10000
+            id选择器1000
+            clss选择器100
+            标签选择器10
+            通用选择器1
+            通过计算比重，来确定应用的样式
+        !important权重无限大
+            不能提升继承而来的样式权重
+    多个类名
+        class="sd kk"
+        div.div${Kmckk$}*3
+        一个标签内权重相同，哪个css写在下面，哪个css生效
+    背景颜色属性
+        background-color # red rgb
+        background-image：url（图片的地址）
+        background-repeat:repeat/repeat-x/repeat-y/no-repeat/(默认为repeat)
+        background-position设置背景图片的位置
+            background-position:水平位置，垂直位置
+                三种位置方式：英文单词，固定值，百分比
+                    left right center top bottom center
+                    px
+                    %
+                    三种位置表达方式可以同时使用
+        background-attachment:fixed
+            图片在窗口上固定，相对窗口视图固定，相对页面滚动
+                scroll相对窗口视图滚动，相对页面固定
+        background简写属性，同时设置多个样式
+            background:简写属性，其值个数不定，顺序也不定，空格分隔
+    标准文档流
+        html网页必须遵循从上到下，从左到右，这就是标准文档流
+        注意事项：
+            空白折叠现象：
+                有空白的现象
+                大片空格会缩减成一个空格
+            高矮不齐，底部对齐
+    浮动
+        能够实现多个元素排在同一行，同时也可以设置宽高
+        （实现了块级元素和行内元素的共同特点）
+        浮动就是让元素脱离标准文档流（浮动元素层级比标准文档流高），不再占用空间
+        float:left/right（左右浮动）
+        浮动元素浮动后，父元素不再包裹浮动元素（浮动元素撑不起父元素）
+        行内元素设置浮动后，就会变为块级元素
+        让多个块级元素排成一行
+        写css一般先通用选择器清楚，margin和padding
+    清除浮动
+        只要有浮动，就必须清除浮动
+        浮动的元素会影响它下面的排版布局
+        浮动元素的父元素没有包裹浮动元素
+        清除了浮动，浮动元素的父元素也会将浮动元素从视觉上包裹着
+        三种方法：
+            给浮动元素的父元素设置固定的高度
+            使用清楚浮动的样式属性clear
+                clear：left/right/both
+                在最后一个浮动元素的下面新建一个空白的div，不给这个div里面放置内容，设置该div的属性clear：both
+            overflow:hidden//overflow是一个属性
+                本身是用来将溢出的部分进行隐藏，但也可以用来清除浮动
+                一般用来清除列表浮动
+
+    盒子模型
+        内容+填充物+纸盒子
+            内容（content）+内填充（padding）+边框（border）+外边距（margin）
+            一个盒子的主要属性：width，height，padding，border，marigin
+        padding：内填充
+            上右下左的方向填充
+            三个值为上 （左右）下
+        margin：外边距（盒子与盒子的间距）
+            上右下左 同padding
+            margin的注意事项：
+                塌陷现象：
+                    竖直方向两个盒子的margin不会叠加，而是使用较大的一个间距
+                    水平方向margin不存在塌陷现象
+                    浮动元素没有塌陷现象
+            margin-right和margin-left都是auto的时候，元素水平就会居中
+                如果这样设置，没有设置宽度，则该元素会占据其父元素百分百的宽度
+                行内元素没有水平宽度，所以无法形成水平居中
+                只有标准文档的盒子才可以通过margin实现水平居中
+                text-align只能实现文本的水平居中，margin只能实现盒子的水平居中
+        多使用父元素的padding而不是子元素的margin
+            子元素margin导致父元素盒子产生外边距
+                两种解决方法：
+                    给父元素设置边框
+                    使用父元素的padding代替子元素的margin
+                说明：margin属性本意是用来描述兄弟元素之间的关系，而父子关系，最好给父元素设置padding属性
+        border
+            border:粗线 线型 颜色 
+                颜色默认为黑色，其他的两个属性值不能不写，不写就不显示边框
+                    线型：dotted点线、dashed虚线、solid实线
+    display
+        进行行内元素与块级元素之间的转换
+            inline行内 block块级 none隐藏
+            display：block这个元素就被转换为块级元素
+            display：inline这个元素就被转换为行内元素
+            display：none将一个显示的元素进行隐藏
+            display：block将一个隐藏的元素显示出来
+    position
+        实现对元素的定位
+            position：fixed
+                相对于浏览器窗口来定位，不管页面如何滚动，固定定位元素显示的位置不会改变
+                元素脱离了标准文档流
+                固定元素定位的层级比标准文档流里的元素要高，所以固定定位元素会压盖标准文档流的元素
+                元素不占用空间
+                元素不会随着浏览器滚动，而是固定窗口界面的位置
+            position：relative
+                相对于原来的自己定位
+                相对定位元素没有脱离标准文档流
+                如果不设置坐标，元素还在原位不变
+                设置坐标后，相对定位元素的原本位置会被保留
+                相对定位元素会将标准文档流中的元素压盖住
+                相对定位元素的坐标值可以为负数
+                主要是用来配合绝对定位使用
+            position：absolute
+                相对于祖先定位元素来定位的
+                查找父元素的定位，如果有定位，根据父元素的定位来定位
+                没有依次向上查找，直到找到具有定位的祖先元素
+                如果都没有，就根据浏览器窗口进行定位
+                脱离了标准文档流，不再占用空间，会压盖住标准文档流的元素
+                绝对定位元素会相对于其祖先定位元素来定位，其祖先，可以是相对定位，也可以是固定定位，也可以是绝对定位
+                    但一般是"子绝父相"
+        配合坐标使用
+            left离左面多远
+            right同上
+            top~
+            bottom~
+    z-index
+        谁压盖着谁，数值大的会压盖住数值小的
+        只有定位的元素才有z-index，默认为0，如果都为0，那么写在后面的元素会覆盖前面的元素
+        z-index就是一个权重，是所有带有定位的元素的权重
+css3
+    css3=css2+新语法+新属性/对css2进行扩充 删减 优化
+    结构伪类
+        :first-child{
+            键值对
+        }
+        :last-child{
+            键值对
+        }
+        :nth-child(n){
+            键值对//匹配第n个孩子
+        }
+        :nth-child(2n)/:nth-child(even){
+            键值对/匹配偶数个孩子
+        }
+        :nth-child(2n+1)/:nth-child(odd){
+            键值对/匹配奇数个孩子
+        }
+        :only-child{
+            键值对/匹配仅有一个孩子
+        }
+    border-collapse:collapse
+        合并表格的边框线
+    伪元素
+        :first-letter操作当前元素的第一个字
+        :first-line操作当前元素的第一行
+        ::before在之前插入，在一个盒子内部的最前面
+        ::after在之后插入，在一个盒子内部的最后面
+    文本阴影
+        水平 垂直 模糊 阴影颜色
+        text-shadow
+    盒子阴影
+        水平 垂直 模糊 尺寸 颜色 内外
+        水平垂直必须写，其他可以省略
+    圆角矩阵
+        border-radius 左上 右上 右下 坐下 顺时针方向
+        可以写一个参数，四个角都相同
+    透明度
+        rgba（红色，绿色，蓝色，透明度）
+            
+
+
+
+                
+
+
+

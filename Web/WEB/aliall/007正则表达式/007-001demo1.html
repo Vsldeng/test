@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            var myInput=document.getElementById("username");
+            var tip=document.getElementById("tip");
+            myInput.onchange=function(){
+                var val=this.value;
+                var reg=/^[a-zA-Z_]\w{5,14}$/;
+                if(reg.test(val)){
+                    tip.innerHTML="格式正确";
+                    tip.style.color="green";
+                }else{
+                    tip.innerHTML="格式错误";
+                    tip.style.color="red";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    用户名:<input type="text" id="username"><span id="tip">(数字，字母，下划线组成的6-15位字符，且不能以数字开头)</span>
+</body>
+</html>

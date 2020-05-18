@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    .container {}
+
+    .container .cart {
+      width: 300px;
+      margin: auto;
+    }
+
+    .container .title {
+      background-color: lightblue;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      /*color: #fff;*/
+    }
+
+    .container .total {
+      background-color: #FFCE46;
+      height: 50px;
+      line-height: 50px;
+      text-align: right;
+    }
+
+    .container .total button {
+      margin: 0 10px;
+      background-color: #DC4C40;
+      height: 35px;
+      width: 80px;
+      border: 0;
+    }
+
+    .container .total span {
+      color: red;
+      font-weight: bold;
+    }
+
+    .container .item {
+      height: 55px;
+      line-height: 55px;
+      position: relative;
+      border-top: 1px solid #ADD8E6;
+    }
+
+    .container .item img {
+      width: 45px;
+      height: 45px;
+      margin: 5px;
+    }
+
+    .container .item .name {
+      position: absolute;
+      width: 90px;
+      top: 0;
+      left: 55px;
+      font-size: 16px;
+    }
+
+    .container .item .change {
+      width: 100px;
+      position: absolute;
+      top: 0;
+      right: 50px;
+    }
+
+    .container .item .change a {
+      font-size: 20px;
+      width: 30px;
+      text-decoration: none;
+      background-color: lightgray;
+      vertical-align: middle;
+    }
+
+    .container .item .change .num {
+      width: 40px;
+      height: 25px;
+    }
+
+    .container .item .del {
+      position: absolute;
+      top: 0;
+      right: 0px;
+      width: 40px;
+      text-align: center;
+      font-size: 40px;
+      cursor: pointer;
+      color: red;
+    }
+
+    .container .item .del:hover {
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="container">
+      <my-cart></my-cart>
+    </div>
+  </div>
+  <script src=".\node_modules\vue\dist\vue.js"></script>
+  <script type="text/javascript">
+
+    var CartTitle = {
+      props: {
+        uname: String
+      },
+      template: `
+        <div class="title">{{uname}}的商品</div>
+      `
+    }
+    var CartList = {
+      props: {
+        shops: Object
+      },
+      template: `
+        <div>
+          <div class="item" v-for="item in shops" :key="item.id">
+            <img src="img/{{item.id}}.jpg"/>
+            <div class="name">{{item.name}}&nbsp{{item.money}}</div>
+            <div class="change">
+              <a href="" @click.prevent="del(item.id)">－</a>
+              <input type="text" class="num" :value='item.nums' @blur='changeNum(item.id,$event)'/>
+              <a href="" @click.prevent="add(item.id)">＋</a>
+            </div>
+            <div class="del" @click="dels(item.id)">×</div>
+          </div>
+        </div>
+      `,
+      methods: {
+        add: function (id) {
+          if (this.shops.filter(item => item.id == id)[0].name == '李玮辰') {
+            alert("别点，你买不起")
+          }
+          this.shops.filter(item => item.id == id)[0].nums++
+        },
+        del: function (id) {
+          if (this.shops.filter(item => item.id == id)[0].name == '李玮辰') {
+            alert("可以，很乖")
+          }
+          this.shops.filter(item => item.id == id)[0].nums--
+        },
+        dels: function (id) {
+          this.$emit('shops1', id)
+        },
+        changeNum: function (id, event) {
+          this.$emit('shops2', {
+            id: id,
+            nums: event.target.value
+          })
+        }
+      }
+    }
+    var CartTotal = {
+      props: {
+        shops: Object
+      },
+      template: `
+        <div class="total">
+          <span>总价：{{total}}</span>
+          <button>结算</button>
+        </div>
+      `,
+      computed: {
+        total: function () {
+          let suma = 0
+          this.shops.forEach(item => {
+            if (item.name != '李玮辰') {
+              suma += (item.nums * item.money)
+            }
+          });
+          return suma
+        }
+      },
+    }
+    Vue.component('my-cart', {
+      data() {
+        return {
+          uname: 'Kmckk',
+          shops: [
+            {
+              id: 0,
+              name: '牛奶',
+              nums: 1,
+              money: 10
+            },
+            {
+              id: 1,
+              name: '小胶囊',
+              nums: 0,
+              money: 100
+            },
+            {
+              id: 2,
+              name: '李玮辰',
+              nums: 0,
+              money: '无价'
+            },
+            {
+              id: 3,
+              name: 'Switch',
+              nums: 0,
+              money: 2000
+            },
+            {
+              id: 4,
+              name: 'iphone11',
+              nums: 0,
+              money: 5000
+            },
+          ],
+        }
+      },
+      template: `
+        <div class='cart'>
+          <cart-title :uname='uname'></cart-title>
+          <cart-list :shops='shops' @shops1='re($event)' @shops2='re2($event)'></cart-list>
+          <cart-total :shops='shops'></cart-total>
+        </div>
+      `,
+      components: {
+        'cart-title': CartTitle,
+        'cart-list': CartList,
+        'cart-total': CartTotal
+      },
+      methods: {
+        re: function (id) {
+          this.shops = this.shops.filter(item => item.id != id)
+        },
+        re2: function (event) {
+          this.shops.filter(item => item.id == event.id)[0].nums = event.nums
+        }
+      }
+    });
+    var vm = new Vue({
+      el: '#app',
+      data: {
+
+      }
+    });
+
+    console.dir(document.body);
+
+  </script>
+</body>
+
+</html>

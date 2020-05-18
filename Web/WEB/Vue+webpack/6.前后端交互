@@ -1,0 +1,255 @@
+能够说出什么是前后端交互
+  原生ajax
+  基于jQuery的ajax//Vue用不到
+  fetch
+  axios
+  客户端-（浏览器通过url地址）-互联网-服务器
+  服务器-（完整html/特定格式的数据（json数据））-互联网-客户端
+  URL地址格式
+    schema://host:port/path?query#fragment
+      schema:协议，如http，https，ftp
+      host：域名或ip地址
+      port：端口号，http默认端口号80，可以省略
+      path：路径，例如/abc/a/b/c
+      query：查询参数，例如uname=lisi&age=12
+      fragment：锚点（哈希Hash）用于定位页面的某个位置
+    Restful形式的URL
+      GET
+      POST
+      PUT
+      DELETE
+promise的相关概念和用法
+  es6专门用来处理异步编程：定时任务settimeout setinterval、ajax、事件函数
+    异步编程如果存在一些依赖，那么需要嵌套回调函数（回调地狱），用promise可以来解决
+      promise可以避免多层异步调用嵌套问题
+      promise对象提供了简洁的API，使得控制异步操作更加容易
+    promise
+      实例化Promise对象，构造函数中传递函数，该函数用来处理异步任务
+        resolve和reject两个参数用于处理成功和失败的两种情况，并通过p.then获取处理结果
+        var p=new Promise(function(resolve,reject){
+          //这里用来实现异步任务
+          //成功时调用resolve()
+          //失败时调用reject()
+        });
+        p.then(function(ret){
+          //从resolve中得到正常结果
+        },function(ret){
+          //从reject中得到错误信息
+        })
+        示例：
+          var p=new Promise(function(resolve,reject){
+            setTimeout(function(){
+              var flag=true
+              if(flag){
+                resolve('right')
+              }else{
+                reject('false')
+              }
+            })
+          });
+          p.then(function(data){
+            console.log(data)
+          },function(info){
+            console.log(info)
+          })
+    基于Promise处理Ajax
+      封装一个独立的函数，在其中产生一个promise独立对象
+      function queryData(url){
+        return new Promise(function(resolve,reject){
+          var xhr=XMLHttpRequest()
+          xhr.onreaddystatechange=function(){
+            if(xhr.readyState !=4) return;
+            if(xhr.readyState ==4 && xhr.status==200){
+              resolve(xhr.responseText)
+            }else{
+              reject('服务器错误')
+            }
+          }
+          xhr.open('get',url)
+          xhr.send(null)
+        });
+      }
+      queryData('http://localhost:3000/data')
+        .then(function(data){
+          console.log(data)
+          return queryData('http://localhost:3000/data1)
+        },function(info){
+          console.log(info)
+        })
+        .then(function(data){
+          console.log(data)
+          return queryData('http://localhost:3000/data2)
+        },function(info){
+          console.log(info)
+        })
+        .then(function(data){
+          console.log(data)
+        },function(info){
+          console.log(info)
+        })
+    Promise常用API
+      实例方法
+        .then获取正常的结果
+        .catch获取异常的结果
+        .finally无论正常和异常，都执行
+      对象方法
+        Promise.all
+          var p1=queryData('http://localhost:3000/a1')
+          var p2=queryData('http://localhost:3000/a2')
+          Promise.all([p1,p2]).then(function(result){
+            console.log(result)//p1和p2的结果
+          })
+          Promise.race([p1,p2]).then(function(result){
+            console.log(result)//p1的结果
+          })
+        Promise.race
+fetch进行接口调用
+  更加简单的数据获取方式，功能更强大，更灵活，可以看作是xhr的升级版
+  fetch(url).then(fn2)
+            .then(fn3)
+            ...
+  fetch('http://localhost:3000/fdata').then(data=>{
+    return data.text()//返回一个promise实例对象，用来获取后台传回来的数据，.text是fetchAPI的一个
+  }).then(function(data){
+    console.log(data)
+  })
+  get的两种请求传参
+    fetch('http://localhost:3000/fdata?id=123',{
+      method:'get'
+    })
+      .then(function(data){
+        return data.text();
+      }).then(function(data){
+        console.log(data)
+      })//后台：req.query.id
+    
+    fetch('http://localhost:3000/fdata/123,{
+      method:'get'
+    })
+      .then(function(data){
+        return data.text()
+      }).then(function(data){
+        console.log(data)
+      })//('/fdata/:id'),req.params.id
+  delete的两种传参和get基本一样，修改该method即可
+  post请求的参数传递
+    传统方式传参
+      fetch('http://localhost:3000/fadata',{
+        method:'post',
+        body:'uname:list&pwd:123',
+        headers:{
+          'Content-Type':'application/x-www-form-urlencoded'
+      }).then(function(data){
+        return data.text()
+      }).then(function(data){
+        console.log(data)
+      })//后台获得参数：req.body.uname+'----'req.body.pwd'
+    json方式传参
+      fetch('http://localhost:3000/fadata',{
+        method:'post',
+        body:JSON.stringify({
+          uname:'张三',
+          pwd:'123'
+        }),
+        headers:{
+          'Content-Type':'application/json'
+      }).then(function(data){
+        return data.text()
+      }).then(function(data){
+        console.log(data)
+      })//后台获得参数：req.body.uname+'----'req.body.pwd
+  put请求和post基本一致，修改该method，修改该url后+/id（123）
+  返回json格式的数据
+    fetch('http://localhost:3000/json').then(function(data){
+      return data.json()
+    }).then(function(data){
+      console.log(data.uname)
+    })//后台：res.json()(原本后台应该是res.send(~~~))
+axios进行接口调用
+  支持浏览器和node.js
+  支持promise
+  能够拦截请求和响应
+  自动转换JSON数据
+  基本用法
+    axios.get('http://localhost:3000/adata).then(function(data){
+      console.log(data.data)//第一个data是名字，第二个是固定的获取后台的数据引用变量名
+    })
+    API
+      get两种传参方式
+        axios.get('http://localhost:3000/adata?id=123).then(function(data){
+          console.log(data.data)//后台，req.quary.id 其他的不变
+        })
+        axios.get('http://.localhost:3000/adata/123).then(function(data){
+          console.log(data.data)//后台,('/adata/:id') req.params.id
+        })
+        axios.get('http://localhost:3000/adata,{
+          params:{
+            id:123
+          }
+        }).then(function(data){
+          console.log(data.data)
+        })//后台使用和第一种一样，req.quary.id
+      delete和get相似
+      post
+        以json格式数据传送
+        axios.post('http://localhost:3000/adata',{
+          uname:'name'
+          id:123
+        }).then(function(data){
+          console.log(data.data)
+        })//后台修改，req.body.uname ,req.body.id
+        var params=new URLSearchParams();
+        params.append('uname','zhangsan');
+        params.append('pwd','111');
+        axios.post('http://localhost:3000/adata',params).then(function(data){
+          console.log(data.data)
+        })
+      put请求和post基本一致，修改该method，修改该url后端更改
+        axios.post('http://localhost:3000/adata/789',{
+          uname:'name'
+          id:123
+        }).then(function(data){
+          console.log(data.data)
+        })//后端修改（'/adata/:id')详细信心存储在，params中
+      全局配置
+        axios.defaults.baseURL='http://localhost:3000/';//可以省略请求中一次次的写基本配置路径
+        axios.defaults.headers['mytoken']='hello';
+      axios拦截器
+        请求拦截器：请求时经过请求拦截器
+          axios.interceptors.request.use(function(config){
+            config.headers.mytoken=''
+          },function(err){
+            console.log(err)
+          })
+          axios.get('adata').then(function(data){
+            console.log(data.data)
+          })
+        响应拦截器：服务器响应必须经过响应拦截器
+          axios.interceptors.response.use(function(res){
+            var data=res.data
+            return data
+          },function(err){
+            console.log(err)
+          })
+async/await方式接口调用
+  async/await
+    单个异步请求
+      async关键字用于函数上，返回promise实例对象
+      await用于async函数上，await得到异步结果
+      async function queryData(id){
+        const ret = await axios.get('adata');
+        return ret.data;
+      }
+      queryData().then(function(data){
+        console.log(data)
+      })
+    多个异步请求
+      async function queryData(){
+        var info=await axios.get('async1');
+        var ret=axios.get('async2?info=' + info.data);
+        return ret.data
+      }
+      quretData().then(function(data){
+        console.log(data)
+      })
+实现案例

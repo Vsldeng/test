@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1{
+            width:300px;
+            height:300px;
+            border:1px solid #aaabbb;
+        }
+    </style>
+    <script>
+        function allowDrop(ev){
+            ev.preventDefault();
+        }
+        function drag(ev){
+            ev.dataTransfer.setData("Text",ev.target.id);
+        }
+        function drop(ev){
+            ev.preventDefault();
+            var data=ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+    </script>
+</head>
+<body>
+    <p>请拖动图片</p>
+    <div id="div1" ondragover="allowDrop(event)" ondrop="drop(event)">
+
+    </div>
+    <img draggable="true" ondragstart="drag(event)" id="drag1" src="./src/1.PNG" alt="breaded" ondragstart="drag(event)">
+</body>
+</html>

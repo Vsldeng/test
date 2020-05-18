@@ -1,0 +1,180 @@
+一、路由的基本概念与原理
+  路由是一个比较广义和抽象的概念，路由的本质就是对应关系
+  后端路由
+    概念：根据不同的用户url请求返回不同内容
+    本质：url请求地址与服务器资源之间的对应关系
+    浏览器--(url)--服务器（后端路由查找资源，返回给浏览器）
+    问题：
+      性能问题，多次调用，不断刷新：ajax前端渲染解决，但不支持前进后退
+      SPA解决：整个网站只有一个页面，支持前进后退
+      SPA实现原理就是前端路由
+  前端路由：事件监听，触发后，通过时间函数渲染不同内容
+    概念:根据不同的用户事件，显示不同的页面内容
+    本质：用户事件与事件处理函数之间的对应关系
+    用户-->用户触发事件-->浏览器（前端路由，查找事件处理函数，返回事件处理函数渲染相应内容）
+  简单的前端路由
+    监听window的onhashchange事件，根据获取到的最新的hash值，切换要显示的组件的名称
+    window.onhashchange=function(){
+      通过location.hash获取到最新的hash值
+    }
+      <div id="app">
+        <a href="#/zhuye">主页</div>
+        <a href="#/keji">科技</div>
+        <a href="#/yule">娱乐</div>
+      </div>
+      <component :is="comName"></component>
+      window.onhashchange=function(){
+        this.comName=location.hash.slice(1,2)
+      }//这里存在自动逸的zhuye，keji，yule三个组件，并且挂载为实例的私有组件
+二、Vue-router的基本使用
+  支持HTML5历史模式或hash模式
+  支持嵌套路由
+  支持路由参数
+  支持编程式路由
+  支持命名路由
+
+  基本使用
+    引入相关的库文件
+      导入vue文件，导入vue-router文件
+    添加路由链接
+      <router-link to="/user">User</router-link>
+      <router-link to="/register">Register</router-link>
+      vue提供的该标签默认渲染成a标签，to属性默认渲染为href属性，to属性的值，默认会被渲染成#开头的hash地址
+    添加路由填充位(路由占位符)
+      通过路由规则匹配到的组件，会被渲染到router-view
+      <router-view></router-view>
+    定义路由组件
+      const User={
+        template:'<h1>User 组件</h1>'
+      }
+      const Register={
+        template:'<h1>Register 组件</h1>'
+      }
+    配置路由规则并创建路由实例
+      var router=new VueRouter({
+        //routes时路由规则数组
+        routes:[
+          //path表示当前规则匹配的hash地址
+          //component表示当前路由规则对应的组件
+          //router-link的to属性和path对应
+          {path:'/user',component:User}
+        ]
+      })
+    把路由挂载到Vue根实例中
+      var vm=new Vue({
+        el:'#app'
+        data(){
+          return {
+
+          }
+        },
+        router:router//后面的router是我们实例化的路由实例，前面时Vue实例的属性
+      })
+  路由的重定向
+    概念：用户在访问地址A的时候，强制用户跳转到地址C，从而展示特定页面
+      var router=new VueRouter({
+        routes:[
+          {path:'/',redirect:'/User'}
+        ]
+      })
+
+三、Vue-router嵌套路由
+  通过路由的层级嵌套，可以在页面展现出复杂的组件关系
+  <p>
+    <router-link to="/user">user</router-link>
+    <router-link to="/register">register</router-link>
+  </p>
+  <router-view></router-view>
+  const user={
+    template:'<div>this is user</div>
+  }
+  const register={
+    template:'<div>
+      <h1>this is register</h1>
+      <router-link to="/register/tab1">tba1</router-link>
+      <router-link to="/register/tab2">tab2</router-link>
+
+      <router-view></router-view>
+  }
+  const tab1={
+    template:'<div>this is tab1</tab1>
+  }
+  const tab2={
+    template:'<div>this is tab2</tab1>
+  }
+  var router=new VueRouter({
+    routes:[
+      {path:'/url',component:user}
+      {path:'/register',component:register,children:[
+        {path:'/register/tab1',component:tab1}
+        {path:'/register/tab2',component:tab2}
+      ]}
+    ]
+  })
+
+  var vm=new Vue({
+    el:'#app',
+    router:router
+  })
+四、Vue-router动态路由匹配
+  <router-link to:"/user/1">user1</router-link>
+  <router-link to:"/user/2">user2</router-link>
+
+  const user={
+    template:'<div> user 的id位{{$router.params.id}}</div>
+  }
+  
+  const router=new VueRouter({
+    routes:[
+      {path:'/user/:id',component:user}
+    ]
+  })
+  传参第二种方式：
+    const user={
+      props:['id','uname','age'],
+      template:'<h1>组件--用户id为{{id}} 姓名{{uname}} 年龄{{age}}
+    }
+    const router=new VueRouter({
+      routes:[
+        {path:'user/:id,component:user,props:route=>(uname:'zs',age:20,id:route.params.id)}
+      ]
+    })
+五、Vue-router命名路由
+  <p>
+    <router-link :to="{name:'user3',params:{id:3}}>user3<router-link>
+  <p>
+  var router=new VueRouter({
+    routes:[
+      path:'user/:id',
+      name:'user3',
+      component:user,
+      props:route=>(uname:'aaa',age:33,id:route.params.id)
+    ]
+  })
+六、Vue-router编程式路由
+  以上都是声明式导航
+  编程式导航
+    通过调用js形式的api实现导航的方式
+      push，go(n)两种方式
+      const user={
+        template:'<div>
+                    <button @click="goRegister"></button>
+                  </div>',
+        methods:{
+          goRegister(){
+            this.$router.push('/register')
+          }
+        }
+      }
+      const register={
+        template:'<div>
+                    <h1>register 组件</h1>
+                    <button @click="goBack">后退</button>
+                  </div>',
+        methods:{
+          goBack(){
+            this.$router.go(-1)
+          }
+        }
+      }
+案例

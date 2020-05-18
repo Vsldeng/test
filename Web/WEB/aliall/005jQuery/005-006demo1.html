@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+        $(function(){
+            var myBtn=document.getElementById("btn");
+            myBtn.onclick=function(){
+                var myInput=document.getElementsByTagName("input")[0];
+                var text=myInput.value;
+                $("img").attr("src",text);
+            }
+        });
+    </script>
+</head>
+<body>
+    <input type="text"/>
+    <button id="btn">切换图片</button>
+    <img src="https://www.baidu.com/img/bd_logo1.png"/>
+</body>
+</html>
