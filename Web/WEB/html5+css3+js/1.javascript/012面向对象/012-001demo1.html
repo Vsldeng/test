@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            function Person(name,age){
+                this.name=name;
+                this.age=age;
+                this.sayHello=function(){
+                    alert(this.name);
+                }
+            }
+            //创建一个对象
+            //this指针指向了这个对象
+            //执行构造函数内的代码
+            //将构造函数返回
+            var p=new Person();
+
+            function Student(name,age,id){
+                this.id=id;
+                this.study=function(){
+                    alert(this.id+'is learing');
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
