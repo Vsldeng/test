@@ -1,0 +1,176 @@
+React
+    简介：声明式的，高效且灵活的js库，使用React可以将简短的独立的代码片段，合成复杂的ui界面.
+    这些代码片段，被称为组件
+    特点
+        react不使用模板
+        react不是mvc框架
+        react是响应式的
+        react是轻量级的js库
+    原理
+        虚拟DOM（react把DOM抽象成一个js对象，通过这个js对象来描述页面）
+        diff算法 转换虚拟DOM和真实DOM
+        
+        虚拟DOM确保只对界面上真正发生变化的部分进行实际的DOM操作
+        逐层次的进行节点的比较
+    历史
+        2013发布
+    开发环境
+        页面引用
+            react.js//核心文件
+            react-dom.js//渲染页面中的DOM 必须依赖于react的核心文件
+            babel.js//es6转换成es5（JSX转换为JavaScript），兼容当前浏览器
+            下载
+            react核心包 npm i react --save
+            react-dom npm i react-dom --save
+            babel npm i babel-standalone --save
+    创建一个react（009-001demo.html）
+        引入三个依赖
+        创建dom根节点，一个页面中需要有一个根节点，这个个节点下的内容就会被react所管理
+        创建babel的script标签
+            写一个jsx的myDom内容
+                JSX=javascript xml javascript的扩展写法
+                优点
+                    执行效率高
+                    安全
+                    编写模板更加简单快速
+            写一个入口
+                ReactDOM.render(myDom,document.getElementById("demoReact"));
+                第一个参数是jsx的dom内容，第二个参数是容器（根节点）
+        注意：myDom的返回值最好用()括起来
+    JSX
+        注释
+            {/*注释内容*/}
+        多行标签(需要有一个父元素进行包裹,建议再加一个括号包裹)
+                let myDom=(<div>
+                            <div>Hello</div>
+                            <div>world</div>
+                          </div>)
+        插入变量(009-002demo.html)
+            jsx中使用表达式，需要把表达式放入{}中
+        修改属性(009-003demo.html)
+            同样使用{}包裹
+        修改样式
+            style属性用{}包裹
+            不同于插入属性的是
+                包裹的内容需要是一个对象，而不再是字符串
+        jsx设置class
+            不可以使用class，而是className
+    React遍历列表(009-004demo.html)
+        map()方法
+            必须给每次遍历的内容加一个key值（key必须独一无二）
+                让React快速了解dom变化
+        for循环
+        for in
+    React遍历对象(009-006demo.html)
+        Object.keys()
+        Object.values()
+    面向组件编程(组件又叫状态机，通过更新组件的state来重新渲染组件)
+        步骤(009-007demo.html)
+            定义组件,渲染组件
+                工厂函数组件
+                    function MyComponent(){
+                        return <h2>工厂函数组件（简单组件）</h2>//返回虚拟dom
+                    }
+                    ReactDom.render(<MyComponent />,document.getElementById('ReactDom'));
+                es6类组件
+                    class MyComponent2 extends React.Component{
+                        render(){
+                            return <h2>es6复杂组件</h2>
+                        }
+                    }
+                    ReactDOM.render(<MyComponent2/>,document.getElementById('reactDom'));
+        组组件的三大属性(009-008demo.hemtl)
+            props(009-009demo.html)
+                获取
+                    this.props.propertyName
+                对props中的属性值进行类型限制和必要性
+                    Person.propType={
+                        name:React.PropTypes.string.isRequired,
+                        age:React.PropType.number.isRequired
+                    }
+                ...打包解包
+                    直接把一个对象或数组传值
+                    形参为...p时,为打包，实参为...p时,为解包
+            refs(009-010demo.html)
+                类似原生的id
+                标识组件内部的某个元素
+            state//有状态定义组件就必须用类组件
+                初始化状态
+                    constructor(props){
+                        super(props)
+                        this.state={
+                            stateProp1:value1,
+                            stateProp2:value2
+                        }
+                    }
+                读取某个状态值
+                    this.state.stateProptyName
+                更新状态（组件自动重新渲染）
+                    this.setState({
+                        stateProp1:value1,
+                        stateProp2:value2
+                    })
+        组件的组合(009-011demo.html)
+            功能界面组件化编码流程
+                拆分组件（拆分界面，组件对应界面）
+                实现静态组件
+                实现动态组件
+                    动态显示初始化数据
+                    交互功能
+                问题：
+                    数据保存在哪个组件内
+                        看数据是某个组件需要（给他），还是某些组件需要（给共同的父亲）
+                    子组件改变父组件状态
+                        不能直接改变父组件的状态
+                        状态在哪个组件，更新状态的行为就应该定义在哪个组件
+                        解决方案：
+                            父组件定义函数，传给子组件，子组件调用
+        React.Component
+            初始化工程
+                npx create-react-app my-app
+                cd my-app
+                cd src
+
+                # 如果你使用 Mac 或 Linux:
+                rm -f *
+
+                # 如果你使用 Windows:
+                del *
+
+                # 然后回到项目文件夹
+                cd ..
+                添加到index.js的头部
+                import React from 'react';
+                import ReactDOM from 'react-dom';
+                import './index.css';
+            概念
+                通过组件告诉React我们希望在屏幕上看到什么
+                当数据发生改变时，React会高效的更新并重新渲染我们的组件
+            ShoppingList（React组件类型）
+                工作原理
+                    props接受一些参数
+                    render()方法的返回描述了要展示在屏幕上的视图的层次结构
+                    React根据根据描述，把结果展示出来
+                    简洁表达
+                        render()方法返回一个React元素，供React使用
+                    大多数React开发者使用JSX特殊语法
+                        <div className="shopping-list">
+                            <h1>ShoppingList for {this.props.name}</h1>
+                            <ul>
+                                <li>Instagram</li>
+                                <li>WhatsApp</li>
+                                <li>Oculus</li>
+                            </ul>
+                        </div>
+                        JSX书写方法
+                            return
+                                React.createElement("div",
+                                    {classNmae:"shiopping-list"},
+                                    /*#__PURE__*/React.createElement("h1",null,"Shopping List for",props.name),
+                                    /*#__PURE__*/React.createElement("ul",null,
+                                        /*#__PURE__*/React.createElement("li",null,"Instagram"),
+                                        /*#__PURE__*/React.createElement("li",null,"WhatsApp"),
+                                        /*#__PURE__*/React.createElement("li",null,"Oculus"),
+                                    )
+                                )
+

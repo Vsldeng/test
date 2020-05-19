@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/react/umd/react.development.js"></script>
+    <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="./node_modules/babel-standalone/babel.min.js"></script>
+    <script src="./node_modules/prop-types/prop-types.js"></script>
+</head>
+<body>
+    <div id="reactDom">
+
+    </div>
+
+    <script type="text/babel">
+        function Person(props){
+            return(
+                <ul>
+                    <li>姓名{props.name}</li>
+                    <li>年龄{props.age? props.age:18}</li>
+                    <li>性别{props.sex? props.sex:'男'}</li>
+                </ul>
+            )
+        }
+        //指定属性值的类型和必要性
+            Person.propTypes={
+                name:PropTypes.string.isRequired,
+                age:PropTypes.number
+            }
+        const p1={
+            name:'Kmckk',
+            age: 18,
+            sex:'女',
+        }
+        ReactDOM.render(<Person name={p1.name} age={p1.age} sex={p1.sex}/>,document.getElementById('reactDom'));
+    </script>
+</body>
+</html>

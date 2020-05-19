@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/react/umd/react.development.js"></script>
+    <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="./node_modules/babel-standalone/babel.min.js"></script>
+    <script src="./node_modules/prop-types/prop-types.js"></script>
+</head>
+<body>
+    <div id="reactDom">
+
+    </div>
+
+    <script type="text/babel">
+        class MyComponent extends React.Component{
+            constructor(props){
+                super(props)
+                this.showInput=this.showInput.bind(this);
+            }
+            showInput(){
+                //ref的使用，refs包含了组件对象中的所有ref
+                // const input=this.refs.content;
+                //input代表当前的input元素，this.input表示组件对象
+                alert(this.input.value);
+            }
+            handleBlur(event){
+                alert(event.target.value)
+            }
+            render(){
+                return(
+                    <div>
+                        <input type="text" ref={input=>this.input=input}/>
+                        <button onClick={this.showInput}>提示输入</button>
+                        <input type="text" ref={input=>this.input2=input} placeholder="失去焦点提示内容" onBlur={this.handleBlur}/>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>,document.getElementById('reactDom'));
+    </script>
+</body>
+</html>
