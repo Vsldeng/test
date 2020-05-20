@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/react/umd/react.development.js"></script>
+    <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="./node_modules/babel-standalone/babel.min.js"></script>
+    <script src="./node_modules/prop-types/prop-types.js"></script>
+</head>
+<body>
+    <div id="ReactDom">
+        
+    </div>
+    <script type="text/babel">
+        class Life extends React.Component{
+            constructor(props){
+                super(props)
+                this.state={
+                    opacity:1,
+                    intervalId:''
+                }
+                this.distroyComponent=this.distroyComponent.bind(this)
+            }
+            componentDidMount(){
+                this.intervalId=setInterval(function(){
+                    console.log(111);
+                    let {opacity}=this.state
+                    opacity-=0.1
+                    if(opacity<=0){
+                        opacity=1
+                    }
+                    this.setState({opacity})
+                }.bind(this),200)
+            }
+            distroyComponent(){
+                ReactDOM.unmountComponentAtNode(document.getElementById('ReactDom'))
+                //处理关闭定时器，防止内存泄露
+            }
+            componentWillUnmount(){
+                clearInterval(this.intervalId)
+            }
+            render(){
+                const {opacity} =this.state
+                return(
+                    <div>
+                        <h2 style={{opacity:opacity}}>{this.props.msg}</h2>
+                        <button onClick={this.distroyComponent}>不活了</button>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Life msg="react太难了!"/>,document.getElementById('ReactDom'));
+    </script>
+</body>
+</html>

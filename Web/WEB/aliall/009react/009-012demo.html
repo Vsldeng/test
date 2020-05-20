@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/react/umd/react.development.js"></script>
+    <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="./node_modules/babel-standalone/babel.min.js"></script>
+    <script src="./node_modules/prop-types/prop-types.js"></script>
+</head>
+<body>
+    <div id="ReactDom">
+        
+    </div>
+    <script type="text/babel">
+        class LoginForm extends React.Component{
+            constructor(props){
+                super(props)
+                this.state={
+                    pwd:''
+                }
+                this.handleSubmit=this.handleSubmit.bind(this);
+                this.handleChange=this.handleSubmit.bind(this);
+            };
+            handleSubmit(event){
+                //取得内容
+                const userName=this.userName.value;
+                const {pwd}=this.state;
+                alert(`准备提交的用户名为${userName},密码为${pwd}`);
+                //不让表单提交，阻止事件的默认行为
+                event.preventDefault();
+            };
+            handleChange(event){
+                const pwd=event.target.value;
+                this.setState({pwd:pwd});
+            };
+            render(){
+
+                return(
+                    <form action="" onSubmit={this.handleSubmit} >
+                            用户名<input type="text" ref={input=>this.userName=input} />
+                            密码：<input type="password" value={this.state.pwd} onChange={this.handleChange} />
+                            <input type="submit" value="登录" />
+                    </form>
+                );
+            };
+        };
+        ReactDOM.render(<LoginForm />,document.getElementById('ReactDom'));
+    </script>
+</body>
+</html>

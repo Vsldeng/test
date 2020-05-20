@@ -1,0 +1,88 @@
+ajax
+    基础常识
+        服务器客户端
+            服务器：能够提供某种服务的电脑
+                一般多使用linux系统，服务=系统+软件
+                    http网页服务：apache tomcat iis
+                    文件上传下载服务： vsftp
+                    数据存储：mysql oracle
+
+            客户端：想使用服务器所提供服务的电脑
+        网络常识
+            ip地址
+                标注某个特定的服务器，来使用该服务器的服务
+            域名
+                ip地址的包装（ip天安门的经纬度，域名：天安门）
+                ping www.baidu.com就能找到百度的IP地址
+            dns域名解析器
+                提供域名和ip地址的映射关系
+                dns得到域名，查找对应的ip地址返回给个人电脑
+                个人电脑发送得到的ip地址给路由器，去查找到对应的ip
+                敲入一个url给浏览器
+                    1.在个人电脑的hosts缓存中找该域名的ip映射
+                    2.hosts->dns服务器->服务器
+            端口
+                一个服务器提供许多服务，用端口来区分不同服务
+        通信协议
+            协议：事先规定好的规则
+            HTTP,HTTPS超文本传输协议
+                HTTP
+                    RequestHeader//请求头规定数据交互要满足的规范
+
+            FTP文件传输协议
+            SMTP简单邮件传输协议
+    AJAX（异步的javaScript和XML）
+    ajax不是新的编程语言，而是一种使用现有标准的新方法
+    ajax是与服务器交换数据并更新部分网页的艺术，在不重新加载整个页面的情况下
+    快速创建动态网页的技术
+    XMLHttpRequest是ajax的基础
+        XMLHttpRequest用于在后台与服务器交换数据，可以不重新加载整个网页，对网页的某部分更新
+        创建XMLHttpRequest
+            variable=new XMLHttpRequest();
+        XMLHttpRequest向服务器发送请求
+            open(method,ulr,async)
+                简介
+                    规定请求的类型，rul，以及是否异步处理请求
+                    method：get/post
+                    url：文件在服务器的位置
+                    async：true（异步）false（同步）
+                get/post
+                    get简单且快
+                    使用post
+                        无法使用缓存文件（更新服务器上的文件或数据库）
+                        向服务器发送大量数据（post没有数据量限制）
+                        发送包含位置字符的用户输入时，post比get更加稳定可靠
+            send(string)
+                将请求发送到服务器
+                string：仅用于post请求
+            设置请求头
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            responseText
+                如果来自服务器的响应并非 XML，请使用 responseText 属性。
+            responseXML
+                如果来自服务器的响应是 XML，而且需要作为 XML 对象进行解析，请使用 responseXML 属性
+            readyState
+                存储XMLHttpRequest的状态，从0-4
+                    0请求未初始化
+                    1服务器连接已建立
+                    2请求已接受
+                    3请求处理中
+                    4请求处理完成，且响应已就绪
+                status
+                    200 ok
+                    404 未找到页面
+                readyState改变会调用存储函数（onreadystatechange）
+                    	xmlhttp.onreadystatechange=function()
+                        {
+                            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                            {
+                                document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+                            }
+                        }
+        使用的四个步骤
+            创建XMLHttpRequest对象
+            准备发送网络请求
+            开始发送网络请求
+            指定回调函数
+        
+
