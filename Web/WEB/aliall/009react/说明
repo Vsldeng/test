@@ -174,7 +174,7 @@ React
                 模块化
                 组件化
                 工程化
-        开始!
+        开始!(项目实例：demo2文件夹)
             npm install -g create-react-app//全局下载脚手架工具包
             create-react-app hello-react //创建项目
             cd hello-react//进入项目目录
@@ -196,7 +196,8 @@ React
             入口文件根据页面根节点，挂载react组件
                 ReactDOM.render(<App />,document.getElementById('root'));
             启动项目后会实时刷新
-    react和ajax
+    
+    react和ajax(010-014demo.html)
         react本身只关注界面，并不包含发送ajax请求的代码
         前端应用需要通过ajax与后台交互
         react应用中需要集成第三方ajax库
@@ -211,3 +212,8 @@ React
         props
         消息订阅（subscribe）-发布机制(publish)
             下载PubSubJs(npm install --save pubsub-js)
+    react router
+        简介：基于react之上的强大路由库，他可以让你快速添加视图和数据流，同时保持页面与rul间的同步
+            根据不同路径，显示不同的内容
+    
+        

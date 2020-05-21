@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/react/umd/react.development.js"></script>
+    <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="./node_modules/babel-standalone/babel.min.js"></script>
+    <script src="./node_modules/prop-types/prop-types.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
+</head>
+<body>
+<div id="ReactDom">
+
+</div>
+
+<script type="text/babel">
+  /*
+  需求:
+    1. 界面效果如下
+    2. 根据指定的关键字在github上搜索匹配的最受关注的库
+    3. 显示库名, 点击链接查看库
+    4. 测试接口: https://api.github.com/search/repositories?q=r&sort=stars
+  */
+  class MostStarRepo extends React.Component{
+    state={
+      repoName:'',
+      repoUrl:''
+    }
+    componentDidMount(){
+      //使用axios发送异步的ajax请求
+      const url=`https://api.github.com/search/repositories?q=re&sort=stars`
+      axios.get(url)
+        .then(response=>{
+          const result=response.data
+          console.log(result);
+          const repo=result.items[0];
+          const{name,html_url}=result.items[0];
+          this.setState({repoName:name,repoUrl:html_url});
+        })
+    }
+    render(){
+      const {repoName,repoUrl}=this.state;
+      if(!repoName){
+        return <h2>LOADING...</h2>
+      }else{
+        return <h2>Most star repo is <a href={repoUrl}>{repoName}</a></h2>
+      }
+    }
+  }
+  ReactDOM.render(<MostStarRepo />,document.getElementById('ReactDom'));
+</script>
+</body>
+</html>
+
+
+
