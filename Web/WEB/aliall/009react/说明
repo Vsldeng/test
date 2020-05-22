@@ -208,12 +208,102 @@ React
                 可以用浏览器端和node服务器端
             fetch:原生函数，但老板浏览器不支持
                 不用XmlHttpRequest，改用fetch.js
-    组件间通讯
+    组件间通讯(demo-commitPubSub/demo-userPubSub)
         props
+            一般数据，父组件传递数据给子组件，子组件读取数据
         消息订阅（subscribe）-发布机制(publish)
             下载PubSubJs(npm install --save pubsub-js)
+            发布者（要发送消息，要说话的组件）
+                PubSub.publish('发布名'，{发布数据})
+                PubSub.subscript('订阅名',回调函数)//回调函数一般用箭头函数，因为一般要调用组件内的方法或者属性
+                    回调函数包含两个固定参数（msg,date）msg是订阅名，date是订阅数据
     react router
-        简介：基于react之上的强大路由库，他可以让你快速添加视图和数据流，同时保持页面与rul间的同步
-            根据不同路径，显示不同的内容
-    
+        简介：
+            基于react之上的强大路由库，必须在react的基础上使用
+            专门用来实现一个SPA应用
+            基于react的项目基本都会用到此库
+        SPA理解（路由链接）
+            单页web应用
+            整个应用只有一个完整的页面
+            点击页面中的链接不会刷新页面，也不会向服务器发送请求
+            点击链接（路由链接），只会发生局部的更新
+            数据都需要通过ajax请求获取，并且在前端异步展现
+        路由的理解
+            router.get(path,回调函数（req，res）)//这是路由器，用来注册路由
+                route（路由）
+                    route是一个映射关系，key：value（key就是路由路径path，value可能是function（后台路由）或者component（前台路由））
+                        后台路由 node服务器路由，value是function，处理客户端请求，并返回响应数据
+                            router.get(path,function(req,res))
+                                node接收到一个请求，根据请求路径找到匹配的路由，调用路由中的函数来处理请求，返回响应数据
+                        前台路由 浏览器路由，value是component，当请求的是路由path的时候，浏览器不发送http请求，但界面会更新显示响应组件
+                            <Router path="/about" component={About}>
+                                当浏览器的hash变为#about时，当前路由组件就会变为About组件
+            组件
+                <BrowserRouter>
+                    h5模式
+                <HashRouter>
+                    哈希模式
+                <Router>
+                    路由
+                <Redirect>
+                    重定向
+                <Link>
+                    路由链接
+                <NavLink>
+                    导航路由链接
+                <Switch>
+                    交换/切换
+            对象
+                history
+                match
+                withRouter
+        开始(demo7-router)
+            下载安装包：
+                npm install --save react-router-dom
+            src下分开写路由组件和非路由组件
+            下载 react-router(npm install --save ract-router@4)
+            引入bootstrap.css:<link rel="stylesheet" href="/css/bootstrap.css"/>
+            分析项目结构
+                整个APP包含头部
+                    两个路由链接
+                    路由组件显示区域
+            index.js
+                用<BrowserRouter>或<HashRouter>管理项目//import{BrowserRouter,HashRouter} from 'react-router-dom'
+            app.jsx
+                import {NavLink,Route,Switch} from 'react-router-dom'//NavLink相当于选项卡，Route相当于路由映射，Switch表明，Route是可切换的
+            系统组件优化
+                定义一个新的组件，引用该系统组件，添加属性传递{...this.props} 添加自定义固有属性，用自定义组件名代替系统组件
+            如何编写路由
+                编写路由组件
+                在父路由组件中指定
+                    路由链接<NavLink>
+                    路由<Route>
+            嵌套路由
+                （home.jsx)
+            路由组件传递数据(message-detail.jsx)
+                不写子组件标签，没法用props传递数据
+                解决方案
+                    路由会自动传props，console.log(props)查看控制台，查看数据结构，寻找需要的值
+            history库(index/js)
+                方式
+                    let history=History.createBrowserHistory()//新HTML5的history用法（地址栏是正常的/test1）
+                    let history=History.createHashHistory()//哈希history用法（地址栏会设置#锚点）
+                Bom里的history对象管理浏览器的历史记录
+                history像一个栈结构
+                    history.push('./text1);//跳转到text1
+                    history.goBack()l//返回前一个
+                    history.goForward();//前往前一个
+                    history.replace()；//替换栈顶元素
+    react-ui
+        概念：流行的react开源库
+        国内 ant-design
+        下载
+            npm install antd-mobile --save
+        引入
+            import {Button} from 'antd'
+        
+                
+            
+
+        
         
