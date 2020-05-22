@@ -301,7 +301,57 @@ React
             npm install antd-mobile --save
         引入
             import {Button} from 'antd'
-        
+    Redux
+        简介
+            专门用来做状态管理的js库（不是react插件库）
+            它可以在react angular vue 中使用，但基本与react使用
+            作用：集中式管理react应用中多个组件共享的状态
+        核心对象
+            Store//从store读状态
+                Action Creators（工厂函数）
+                    dispatch(action)//通知Store更新数据
+                        action
+                            type data//事件类型，数据
+                Store把previousState和action给Reducers
+                Reducers（previousState,action)//返回新状态给Store
+                    return （newState）
+        什么时候使用redux
+            总体原则
+                能不用就不用
+            某个组件的状态需要共享
+            某个状态需要在任何地方都可以拿到
+            一个组件需要改变全局状态
+            一个组件需要改变另一个组件的状态
+        开始（demo8-redux)
+
+        核心概念
+            action
+                type：'increament'
+                data:2
+                对应action的工厂函数：
+                    action creator=(number)=>({type:'increment',data:number})//创建antion的工厂函数
+            reducer
+                根据老的state和action产生state的纯函数
+                注意
+                    返回一个新的状态，不要修改老的状态
+            createStore()
+                作用：创建包含指定reducer的store对象
+            store
+                将state action reducer联系在一起的对象
+                管理state reducer
+                核心方法
+                    getState()//获取状态
+                    dispatch(action)//分发action，自动调用reducers()
+                    subscribe(listener)//重新渲染组件
+        react-redux(demo9-react-redux)
+            一个react插件库
+            专门用来简化react应用中使用redux
+            下载该插件
+                npm install --save react-redux
+        redux异步编程
+            redux不支持异步编程
+                下载中间件 npm install --save redux-thunk
+
                 
             
 
