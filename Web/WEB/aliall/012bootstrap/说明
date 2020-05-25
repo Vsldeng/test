@@ -1,0 +1,63 @@
+简介
+    快速开发web应用程序和网站的前端框架（基于html css js）
+    响应式布局
+    bootstrap包的内容
+        基本结构
+        css
+        组件：bootstrap包含十几个可重用的组件，用于创建图像，下拉菜单，导航，警告框，弹出框等
+        JavaScript插件：包含十几个自定义的jQuery插件，可以直接包含所有的插件，也可以逐个包含这些插件
+        定制：可以定制bootstrap的组件，less变量和jQuery插件
+    安装
+        安装bootstrap
+            npm install bootstrap@3
+        安装Grunk
+            npm install -g grunt-cli
+    css
+        容器
+            最外层.container，包含所有的row
+        流式布局容器
+            最外层的.container修改为.container-fluid
+        栅格
+            row规定为一行
+                电脑
+                    包含12块.col-md-1
+                移动设备
+                    .col-xs-1//12列
+                pad
+                    .col-sm-1//12列
+            多余的列将另起一行
+            某一列行高过高
+                .clearfix清除
+            列偏移
+                .col-md-offset-1//向右偏移1列
+            嵌套列
+                可以在col中包含row再包含col进行列的嵌套
+            列排序
+                col-md-9//权重为9，权重大的向左排列
+        排版
+            标题
+                h1到h6，并且设计了.h1-.h6的属性，用来给内联属性的文本赋予标题的样式
+                副标题
+                    .small类，用来标记副标题
+            页面主题
+                font-size设置14px line-height设置1.428//赋予在整个body中
+            中心内容
+                .lead设置段落突出显示
+            内联文本元素
+                del标签删除
+                s标签无用内容
+                ins插入文本
+                u下划线文本
+                small小号文本
+                strong加重文本
+                em斜体文本
+            对齐
+                .text-left
+                .text-right
+                .text-center
+            改变大小
+                .text-lowercase
+                .text-uppercase
+                .text-capitalize
+            
+        

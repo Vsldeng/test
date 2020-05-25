@@ -351,6 +351,30 @@ React
         redux异步编程
             redux不支持异步编程
                 下载中间件 npm install --save redux-thunk
+    reactHOOK(demo10HOOK)
+        概念：以use作为标志
+        功能：
+            增强了函数组件的功能
+                状态useState
+                生命周期
+                引用
+                自定义hook
+                    当我们想在两个函数之间共享逻辑，我们会把他提取到第三个函数中，而组件和hook都是函数，所以也同样适用这种方式
+                        自定义hook是一个以use开头的函数，函数内部可以调用其他的hook
+                    本质上和函数没有区别
+        userState//在函数组件中使用状态
+        useEffect//在函数中使用生命周期函数
+            无阻塞的更新
+        useRef
+            获取DOM元素
+            存取对象
+        useContext/createContext
+            父子组件传值
+        useReducer
+            和redux中的reducer是一样的
+            参数
+                reducer，初始值，init函数
+
 
                 
             
