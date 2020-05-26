@@ -38,7 +38,7 @@ ajax
     XMLHttpRequest是ajax的基础
         XMLHttpRequest用于在后台与服务器交换数据，可以不重新加载整个网页，对网页的某部分更新
         创建XMLHttpRequest
-            variable=new XMLHttpRequest();
+            var iable=new XMLHttpRequest();
         XMLHttpRequest向服务器发送请求
             open(method,ulr,async)
                 简介
