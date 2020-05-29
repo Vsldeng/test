@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '../component/Login.vue'
-import Home from '../component/Home/Home.vue'
+import Login from './component/Login.vue'
+import Home from './component/Home/Home.vue'
 import Welcome from '../component/Home/Children/Welcome.vue'
 import Users from '../component/Home/Children/Users.vue'
 
