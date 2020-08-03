@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/react/umd/react.development.js"></script>
+    <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="./node_modules/babel-standalone/babel.min.js"></script>
+    <script src="./node_modules/prop-types/prop-types.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
+</head>
+<body>
+<div id="ReactDom">
+
+</div>
+
+    <script type="text/babel"> 
+        class Switch extends React.Component{
+            state={
+                isToggleOn:true,
+            }
+            switchON=()=>{
+                this.setState({
+                    isToggleOn:!isToggleOn
+                })
+            }
+            render(){
+                return(
+                    <div>
+                        <button onClick={this.switchON}>{this.state.isToggleOn? 'ON':'Off'}</button>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <Switch />,
+            document.getElementById('#ReactDom')
+        )
+    </script>
+</body>
+</html>

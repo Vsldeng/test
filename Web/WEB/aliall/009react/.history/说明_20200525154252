@@ -79,7 +79,7 @@ React
                         }
                     }
                     ReactDOM.render(<MyComponent2/>,document.getElementById('reactDom'));
-        组组件的三大属性(009-008demo.html)
+        组组件的三大属性(009-008demo.hemtl)
             props(009-009demo.html)
                 获取
                     this.props.propertyName
